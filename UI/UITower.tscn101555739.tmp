@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://b34teb260bjyh"]
+
+[ext_resource type="Texture2D" uid="uid://mlh7re2bttep" path="res://tiles/assets/button_square_depth_flat.png" id="1_wne4p"]
+[ext_resource type="Script" uid="uid://h8lisujs3wki" path="res://UI/UI_tower.gd" id="2_eho2c"]
+[ext_resource type="Texture2D" uid="uid://4on4qdnkmi1u" path="res://tiles/assets/castle.png" id="2_u1tf8"]
+
+[node name="UITower" type="NinePatchRect"]
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_wne4p")
+script = ExtResource("2_eho2c")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 7.0
+offset_right = 15.642
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_u1tf8")
+expand_mode = 3
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

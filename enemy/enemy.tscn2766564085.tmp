@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://db7t02pms4t1t"]
+
+[ext_resource type="Texture2D" uid="uid://dt4okgedpck3x" path="res://tiles/assets/monster.png" id="1_2mvqj"]
+[ext_resource type="Script" uid="uid://ckn6bou6o8obb" path="res://enemy/enemy.gd" id="1_ofsxj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ofsxj"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ppra6"]
+radius = 7.0
+
+[node name="enemy" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_ofsxj")
+health = null
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -4.76837e-07)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_2mvqj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ofsxj")
+
+[node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ppra6")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

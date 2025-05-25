@@ -1,0 +1,62 @@
+[gd_resource type="TileSet" load_steps=13 format=3 uid="uid://d24dnxifhtvs"]
+
+[ext_resource type="Texture2D" uid="uid://eiyeeu2rwvi0" path="res://tiles/tile_sprites/tile_00.png" id="1_446qf"]
+[ext_resource type="Texture2D" uid="uid://ckfxdd8j0g8bp" path="res://tiles/tile_sprites/tile_01.png" id="2_ecvv8"]
+[ext_resource type="Texture2D" uid="uid://dwh153iaihopt" path="res://tiles/tile_sprites/tile_02.png" id="3_6mafl"]
+[ext_resource type="Texture2D" uid="uid://bpreifywydlnw" path="res://tiles/tile_sprites/tile_03.png" id="4_a3g6k"]
+[ext_resource type="Texture2D" uid="uid://hdaeutq2xkb2" path="res://tiles/tile_sprites/tile_04.png" id="5_ct2u1"]
+[ext_resource type="Texture2D" uid="uid://xya0ctatgb0w" path="res://tiles/tile_sprites/tile_05.png" id="6_5c80t"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wlmwe"]
+texture = ExtResource("1_446qf")
+texture_region_size = Vector2i(20, 20)
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+0:0/0/custom_data_1 = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h6daj"]
+texture = ExtResource("2_ecvv8")
+texture_region_size = Vector2i(20, 20)
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_khfed"]
+texture = ExtResource("3_6mafl")
+texture_region_size = Vector2i(20, 20)
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mnmjp"]
+texture = ExtResource("4_a3g6k")
+texture_region_size = Vector2i(20, 20)
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xhia8"]
+texture = ExtResource("5_ct2u1")
+texture_region_size = Vector2i(20, 20)
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n60k7"]
+texture = ExtResource("6_5c80t")
+texture_region_size = Vector2i(20, 20)
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+
+[resource]
+tile_shape = 3
+tile_size = Vector2i(20, 20)
+custom_data_layer_0/name = "unwalkable"
+custom_data_layer_0/type = 1
+custom_data_layer_1/name = "towerable"
+custom_data_layer_1/type = 1
+sources/5 = SubResource("TileSetAtlasSource_n60k7")
+sources/4 = SubResource("TileSetAtlasSource_xhia8")
+sources/3 = SubResource("TileSetAtlasSource_mnmjp")
+sources/2 = SubResource("TileSetAtlasSource_khfed")
+sources/1 = SubResource("TileSetAtlasSource_h6daj")
+sources/0 = SubResource("TileSetAtlasSource_wlmwe")

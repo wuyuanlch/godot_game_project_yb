@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MonsterStats" load_steps=3 format=3 uid="uid://c0a7qx7sf6ymi"]
+
+[ext_resource type="Script" uid="uid://brtcbnpn57rj7" path="res://enemy/monster_types/MonsterStats.gd" id="1_aketk"]
+[ext_resource type="Texture2D" uid="uid://dt4okgedpck3x" path="res://tiles/assets/monsters/monster_0.png" id="2_3s8g0"]
+
+[resource]
+script = ExtResource("1_aketk")
+monster_name = "Monster_0"
+texture = ExtResource("2_3s8g0")
+health = 1
+power = 1
+speed = 40
+metadata/_custom_type_script = "uid://brtcbnpn57rj7"

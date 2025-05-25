@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dimouv6pyggse"]
+
+[ext_resource type="TileSet" uid="uid://d24dnxifhtvs" path="res://levels/level/level.tres" id="1_jww0w"]
+[ext_resource type="Script" uid="uid://c2luljwhw3mpi" path="res://levels/level/level.gd" id="1_mmlqq"]
+
+[node name="level" type="TileMapLayer"]
+y_sort_enabled = true
+texture_filter = 1
+tile_set = ExtResource("1_jww0w")
+script = ExtResource("1_mmlqq")

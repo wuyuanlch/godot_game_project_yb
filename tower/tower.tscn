@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://brr5q5nfh47o7"]
+
+[ext_resource type="Script" uid="uid://dqtk2ub0833g2" path="res://tower/script/tower.gd" id="1_3fjlj"]
+[ext_resource type="Texture2D" uid="uid://4on4qdnkmi1u" path="res://tiles/assets/towers/castle.png" id="1_758mn"]
+[ext_resource type="PackedScene" uid="uid://cpkwhpvqb88ww" path="res://tower/bullet.tscn" id="3_4ulc0"]
+[ext_resource type="Script" uid="uid://c26xijpc7i31q" path="res://tower/script/range_visualizer.gd" id="4_xnkcx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3fjlj"]
+size = Vector2(14, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ulc0"]
+radius = 60.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xnkcx"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pwp32"]
+bg_color = Color(1, 0, 0.0431373, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[node name="Tower" type="StaticBody2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_3fjlj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_758mn")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3fjlj")
+
+[node name="Aim" type="Marker2D" parent="."]
+position = Vector2(6, 0)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_4ulc0")
+
+[node name="BulletContainer" type="Node" parent="."]
+
+[node name="shootingCoolDown" type="Timer" parent="."]
+
+[node name="Bullet" parent="." instance=ExtResource("3_4ulc0")]
+
+[node name="RangeVisualizer" type="Node2D" parent="."]
+script = ExtResource("4_xnkcx")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -8.0
+offset_top = -12.0
+offset_right = 17.0
+offset_bottom = -8.0
+scale = Vector2(0.6, 0.3)
+theme_override_styles/background = SubResource("StyleBoxFlat_xnkcx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_pwp32")
+value = 100.0
+show_percentage = false
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="shootingCoolDown" to="." method="_on_shooting_cool_down_timeout"]
