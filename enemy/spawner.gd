@@ -22,6 +22,8 @@ func _ready():
 
 
 func _on_spawn_timer():
+	if get_tree().get_nodes_in_group("active_towers").is_empty():
+		return
 	var map_rect = grid.base_layer.get_used_rect()
 	var valid_spawns = []
 	

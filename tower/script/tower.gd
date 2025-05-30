@@ -2,7 +2,7 @@ class_name Towers
 extends StaticBody2D
 
 # 单个防御塔的代码，可朝向敌人，攻击离中心点最近的敌人
-var bullet:PackedScene=preload("res://tower/bullet.tscn")
+var bullet:PackedScene=preload("res://bullet/bullet.tscn")
 var bullet_damage:int = 1
 var current_targets:Array=[]
 var curr :CharacterBody2D
@@ -12,6 +12,7 @@ var can_look:bool=true
 @onready var detection_area: Area2D = $Area2D
 @onready var range_visualizer: Node2D = $RangeVisualizer
 
+var health: int=100
 
 func _ready():
 	
@@ -48,7 +49,7 @@ func _process(delta):
 func shoot()->void:
 	var temp_bullet:CharacterBody2D=bullet.instantiate()
 	temp_bullet.target = curr
-	temp_bullet.bullet_damage = bullet_damage
+	temp_bullet.bullet_Stats.power = bullet_damage
 	get_node("BulletContainer").add_child(temp_bullet)
 	temp_bullet.global_position = $Aim.global_position
 
@@ -70,6 +71,15 @@ func choose_target(_current_targets:Array)->void:
 				current_target = enemy
 	
 	curr = current_target
+
+func tower_take_damage(damage:int)->void:
+	health -= damage
+	health = max(health, 0)
+	# update_health_bar()
+
+	if health<=0:
+		queue_free()
+
 
 
 func _on_area_2d_body_entered(body):
