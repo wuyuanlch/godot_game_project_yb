@@ -27,6 +27,6 @@ func _on_collision_body_entered(body):
 
 	if body.is_in_group("Tower"):
 		body.tower_take_damage(bullet_Stats.power)
-		print(2)
+		#print(2)
 		queue_free()
 # wzy

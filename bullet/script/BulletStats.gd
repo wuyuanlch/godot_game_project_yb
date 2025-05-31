@@ -1,8 +1,8 @@
 extends Resource
 class_name BulletStats
 
-@export var bullet_name: String = "Unnamed Bullet" # 怪物名称 (可选, 用于调试或UI)
-@export var texture: Texture2D                  # 怪物的纹理
-@export var power: int = 1                      # 怪物的强度/攻击力
-@export var speed: int = 50                     # 怪物的移动速度 (可选)
-#@export var defense: int = 1 				   # 怪物的护甲
+@export var bullet_name: String = "Unnamed Bullet" 
+@export var texture: Texture2D                
+@export var power: int = 1                      
+@export var speed: int = 50                     
+#@export var defense: int = 1 				 
