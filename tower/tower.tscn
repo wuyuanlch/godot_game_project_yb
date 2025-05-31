@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://brr5q5nfh47o7"]
+[gd_scene load_steps=10 format=3 uid="uid://brr5q5nfh47o7"]
 
 [ext_resource type="Script" uid="uid://dqtk2ub0833g2" path="res://tower/script/tower.gd" id="1_3fjlj"]
 [ext_resource type="Texture2D" uid="uid://4on4qdnkmi1u" path="res://tiles/assets/towers/castle.png" id="1_758mn"]
+[ext_resource type="Texture2D" uid="uid://b5hdqjubf5qta" path="res://tiles/assets/buttons/delete.png" id="4_pwp32"]
 [ext_resource type="Script" uid="uid://c26xijpc7i31q" path="res://tower/script/range_visualizer.gd" id="4_xnkcx"]
+[ext_resource type="Texture2D" uid="uid://b3s3ccdpylnqd" path="res://tiles/assets/buttons/update.png" id="5_vplrr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fjlj"]
 size = Vector2(14, 14)
@@ -46,7 +48,7 @@ position = Vector2(6, 0)
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="ShootArea" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_4ulc0")
 
 [node name="BulletContainer" type="Node" parent="."]
@@ -56,17 +58,53 @@ shape = SubResource("CircleShape2D_4ulc0")
 [node name="RangeVisualizer" type="Node2D" parent="."]
 script = ExtResource("4_xnkcx")
 
-[node name="HealthBar" type="ProgressBar" parent="."]
+[node name="HB_node" type="Node2D" parent="."]
+
+[node name="HealthBar" type="ProgressBar" parent="HB_node"]
 offset_left = -8.0
-offset_top = -12.0
+offset_top = -14.0
 offset_right = 17.0
-offset_bottom = -8.0
+offset_bottom = -10.0
 scale = Vector2(0.6, 0.3)
 theme_override_styles/background = SubResource("StyleBoxFlat_xnkcx")
 theme_override_styles/fill = SubResource("StyleBoxFlat_pwp32")
 value = 100.0
 show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="TowerActionsUI" type="Control" parent="Node2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -12.0
+offset_right = 40.0
+offset_bottom = 28.0
+scale = Vector2(0.4, 0.4)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="Node2D/TowerActionsUI"]
+layout_mode = 0
+offset_left = -52.0
+offset_top = -48.0
+offset_right = 42.0
+offset_bottom = -8.0
+theme_override_constants/separation = 25
+
+[node name="DeleteButton" type="Button" parent="Node2D/TowerActionsUI/ButtonsContainer"]
+texture_filter = 1
+layout_mode = 2
+icon = ExtResource("4_pwp32")
+
+[node name="UpgradeButton" type="Button" parent="Node2D/TowerActionsUI/ButtonsContainer"]
+texture_filter = 1
+layout_mode = 2
+icon = ExtResource("5_vplrr")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="shootingCoolDown" to="." method="_on_shooting_cool_down_timeout"]
+[connection signal="pressed" from="Node2D/TowerActionsUI/ButtonsContainer/DeleteButton" to="." method="_on_delete_button_pressed"]
+[connection signal="pressed" from="Node2D/TowerActionsUI/ButtonsContainer/UpgradeButton" to="." method="_on_upgrade_button_pressed"]

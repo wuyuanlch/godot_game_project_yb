@@ -10,7 +10,10 @@ var can_look:bool=true
 
 @onready var detection_area: Area2D = $Area2D
 @onready var range_visualizer: Node2D = $RangeVisualizer
-@onready var health_bar: ProgressBar = $HealthBar
+@onready var tower_ui_parent: Node2D = $Node2D
+@onready var tower_actions_ui: Control = $Node2D/TowerActionsUI
+@onready var hb_node: Node2D = $HB_node
+@onready var health_bar: ProgressBar = $HB_node/HealthBar
 
 
 var health: int = 100
@@ -36,6 +39,12 @@ func _ready():
 			print_debug("Tower: RangeVisualizer is missing 'update_shape' method.")
 			
 	update_health_bar()
+	
+	# 默认隐藏
+	if is_instance_valid(tower_actions_ui):
+		tower_actions_ui.visible = false
+	
+	input_pickable = true
 
 
 func _process(delta):
@@ -49,8 +58,42 @@ func _process(delta):
 	else:
 		for i in get_node("BulletContainer").get_child_count():
 			get_node("BulletContainer").get_child(i).queue_free()
-	
 
+	# 将这个中间 Node2D 的旋转设置为防御塔旋转的负值，以抵消防御塔的旋转
+	tower_ui_parent.rotation = -self.rotation
+	
+	hb_node.rotation = -self.rotation
+
+
+func _input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	# 检查是否是鼠标左键按下事件
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		# 当 _input_event 触发时，意味着鼠标已经点击到这个StaticBody2D的碰撞形状上
+		show_tower_actions_ui(true)
+		
+		# 标记事件为已处理，防止其他物体也接收到这个点击事件
+		get_viewport().set_input_as_handled()
+		
+			
+func show_tower_actions_ui(visible: bool) -> void:
+	if is_instance_valid(tower_actions_ui):
+		tower_actions_ui.visible = visible
+		if visible:
+			var tower_height_local = 0.0
+			var collision_shape = get_node("CollisionShape2D")
+			if collision_shape and collision_shape.shape is RectangleShape2D:
+				tower_height_local = collision_shape.shape.size.y / 2
+
+			var ui_offset_y = -tower_height_local # 塔顶部相对于塔中心的 Y 偏移
+
+			ui_offset_y -= tower_actions_ui.size.y / tower_actions_ui.get_canvas_transform().get_scale().y # 根据UI在Canvas上的实际缩放来调整
+
+			tower_actions_ui.position.x = 0 
+			tower_actions_ui.position.y = -tower_height_local - tower_actions_ui.size.y / 6
+			
+			var camera = get_viewport().get_camera_2d()
+			
+			
 func shoot(stats: BulletStats)->void:
 	var temp_bullet:CharacterBody2D = bullet.instantiate()
 	
@@ -119,9 +162,20 @@ func show_attack_range(is_visible: bool) -> void:
 	if is_instance_valid(range_visualizer):
 		range_visualizer.visible = is_visible
 
+
 func update_health_bar() -> void: # <--- 新增：更新血条的函数
 	if is_instance_valid(health_bar):
 		health_bar.max_value = max_health
 		health_bar.value = health
 		# 血量不满时显示，满血时隐藏
 		health_bar.visible = health < max_health
+
+
+func _on_delete_button_pressed() -> void:
+	show_tower_actions_ui(false) 
+	queue_free()
+	
+
+func _on_upgrade_button_pressed() -> void:
+	show_tower_actions_ui(false) 
+	print("防御塔被升级！")

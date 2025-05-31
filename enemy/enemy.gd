@@ -146,7 +146,6 @@ func apply_monster_stats(stats: MonsterStats):
 	if stats.texture:
 		sprite_2d.texture = stats.texture
 	
-	bullet_damage = stats.power
 	update_health_bar()
 
 
@@ -210,7 +209,8 @@ func shoot(stats: BulletStats)->void:
 	temp_bullet.target = curr
 	temp_bullet.is_enemy_bullet = true
 	
-	temp_bullet.tower_bullet_damage = stats.damage 
+	temp_bullet.enemy_bullet_damage = stats.damage 
+	# print(temp_bullet.tower_bullet_damage)
 	temp_bullet.speed = stats.speed
 
 	if temp_bullet.has_node("Sprite2D"): 

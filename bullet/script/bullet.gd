@@ -7,7 +7,7 @@ var target:Node2D
 var speed:int = 50
 
 var enemy_bullet_damage: int 
-var tower_bullet_damage: int = 2
+var tower_bullet_damage: int
 var is_enemy_bullet:bool = false  
 var is_tower_bullet:bool = false  
 
@@ -27,12 +27,12 @@ func _on_collision_body_entered(body):
 	if body.is_in_group("Enemy"):
 		if is_tower_bullet:
 			body.take_damage(tower_bullet_damage)
-		#print(tower_bullet_damage)
+		# print(tower_bullet_damage)
 		queue_free()
 
 	elif body.is_in_group("Tower"):
 		if is_enemy_bullet:
 			body.tower_take_damage(enemy_bullet_damage)
-		#print(2)
+		# print(enemy_bullet_damage)
 		queue_free()
 # wzy
