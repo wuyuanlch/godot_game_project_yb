@@ -22,9 +22,14 @@ var current_grid_pos: Vector2i  # 添加敌人当前网格位置
 var target_tower: Node2D = null # 当前目标防御塔
 var recheck_towers_timer: Timer # 用于周期性重新检查塔的计时器
 var is_placed: bool = false # 新增：标记塔是否已正式放置，默认为 false
+var towers_in_range: Array[Node2D] = [] # 范围内的防御塔数组
 
 const RECHECK_INTERVAL: float = 0.5 # 每隔1秒重新检查一次塔
 
+var bullet:PackedScene=preload("res://bullet/enemy_bullet.tscn")#攻击的子弹
+var curr :Node2D
+var bullet_damage:int = 2
+var can_shoot:bool=true
 
 func _ready():
 
@@ -141,9 +146,15 @@ func apply_monster_stats(stats: MonsterStats):
 
 
 # 改为 _physics_process 以处理物理运动
-func _physics_process(delta: float) -> void: 
+func _physics_process(delta: float):
 	if not is_instance_valid(grid) or not is_instance_valid(grid.base_layer):
 		velocity = Vector2.ZERO 
+		move_and_slide()
+		return
+
+	# 如果有防御塔在攻击范围内，则停止移动
+	if not towers_in_range.is_empty():
+		velocity = Vector2.ZERO
 		move_and_slide()
 		return
 
@@ -179,6 +190,21 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO # 停止移动
 		move_and_slide()
 
+
+func _process(delta):
+	if is_instance_valid(curr):
+		if can_shoot:
+			shoot()
+			can_shoot=false
+			$shootingCoolDown.start()
+
+#射击
+func shoot()->void:
+	var temp_bullet:CharacterBody2D=bullet.instantiate()
+	temp_bullet.target = curr
+	temp_bullet.bullet_Stats.power = bullet_damage
+	get_node("BulletContainer").add_child(temp_bullet)
+	temp_bullet.global_position = $Aim.global_position
 			
 func take_damage(damage:int)->void:
 	health -= damage
@@ -187,37 +213,20 @@ func take_damage(damage:int)->void:
 
 	if health<=0:
 		queue_free()
-	
+
+func _on_attack_range_body_exited(body):
+	if body.is_in_group("active_towers"):
+		towers_in_range.erase(body)
+		if towers_in_range.is_empty():
+			update_target_and_path()  # 重新寻找目标并计算路径
+
+func _on_attack_range_body_entered(body):
+	if body.is_in_group("active_towers"):
+		towers_in_range.append(body)
+		velocity = Vector2.ZERO
+		curr=body
+		move_and_slide()
 
 
-#func _init_path():
-	#var start_coord = grid.base_layer.local_to_map(global_position)
-	#var target_coord = Vector2i(10, 7)
-	#target_path = grid.astar.get_id_path(start_coord, target_coord)
-	
-#
-#func _process(delta):
-	#if not is_instance_valid(grid):
-		#return
-	#
-	## 更新当前网格位置
-	#current_grid_pos = grid.base_layer.local_to_map(global_position)
-		#
-	## if Input.is_action_just_pressed("click"):
-	## 	var mouse_position = get_global_mouse_position()
-	## 	print("1鼠标位置: ",mouse_position,"鼠标网格位置: ",grid.local_to_map(mouse_position))
-#
-	#if target_path:
-		#if target_path.is_empty():
-			## 重新计算到终点的路径
-			#target_path = grid.astar.get_id_path(
-				#grid.local_to_map(global_position),
-				#Vector2i(18, -6)
-			#)
-		#
-		#var next_point = target_path[0]
-		#var target_position = grid.base_layer.map_to_local(next_point)
-		#global_position = global_position.move_toward(target_position, speed * delta)
-		#
-		#if global_position.distance_to(target_position) < 1:  # 到达容差范围内
-			#target_path.remove_at(0)
+func _on_shooting_cool_down_timeout():
+	can_shoot=true

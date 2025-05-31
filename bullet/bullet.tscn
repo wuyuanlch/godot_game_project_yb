@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://cpkwhpvqb88ww"]
+
+[ext_resource type="Script" uid="uid://cuw7a7s4uj0in" path="res://bullet/script/bullet.gd" id="1_6wip1"]
+[ext_resource type="Texture2D" uid="uid://bgwkf6cayiwqw" path="res://tiles/assets/Fireball_Small.png" id="2_0qjqd"]
+[ext_resource type="Script" uid="uid://ddgvx72i2ivi5" path="res://bullet/script/BulletStats.gd" id="2_xvnxm"]
+
+[sub_resource type="Resource" id="Resource_0qjqd"]
+script = ExtResource("2_xvnxm")
+bullet_name = "Unnamed Bullet"
+power = 1
+speed = 100
+metadata/_custom_type_script = "uid://ddgvx72i2ivi5"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wwakr"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l2kp2"]
+radius = 3.0
+
+[node name="Bullet" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_6wip1")
+bullet_Stats = SubResource("Resource_0qjqd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_0qjqd")
+hframes = 6
+vframes = 4
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wwakr")
+
+[node name="Collision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
+shape = SubResource("CircleShape2D_l2kp2")
+
+[connection signal="body_entered" from="Collision" to="." method="_on_collision_body_entered"]

@@ -40,7 +40,9 @@ func _on_gui_input(event):
 			var local_pos1 = map.map_to_local(new_tile_pos)
 			preview_tower.global_position = map.to_global(local_pos1)
 			
-	elif event is InputEventMouseButton and event.button_mask == 0:
+	# elif event is InputEventMouseButton and event.button_mask == 0:
+	# 修复滚动键也可以放置塔
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 		#var mouse_pos1 = get_global_mouse_position()
 		var mouse_pos1 = GlobalCamera.get_global_mouse_position()
 		
