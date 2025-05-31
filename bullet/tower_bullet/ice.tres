@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BulletStats" load_steps=3 format=3 uid="uid://b5ju5blekytqu"]
+
+[ext_resource type="Script" uid="uid://ddgvx72i2ivi5" path="res://bullet/script/BulletStats.gd" id="1_bb5of"]
+[ext_resource type="Texture2D" uid="uid://yhboprufedpx" path="res://tiles/assets/bullets/ice/1_001.png" id="2_556kf"]
+
+[resource]
+script = ExtResource("1_bb5of")
+bullet_name = "Unnamed Bullet"
+texture = ExtResource("2_556kf")
+damage = 5
+speed = 30
+metadata/_custom_type_script = "uid://ddgvx72i2ivi5"

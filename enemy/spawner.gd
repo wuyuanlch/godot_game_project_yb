@@ -2,8 +2,8 @@ extends Node2D
 
 # 敌人生成配置
 @export_group("Spawn Settings")
-@export var spawn_interval := 8.0 # 敌人生成间隔(秒)
-@export var spawn_count := 5     # 每次生成的敌人数量
+@export var spawn_interval := 4.0 # 敌人生成间隔(秒)
+@export var spawn_count := 3     # 每次生成的敌人数量
 @export var enemy_scene: PackedScene = preload("res://enemy/enemy.tscn") # 敌人场景
 
 # 节点引用

@@ -7,7 +7,7 @@
 script = ExtResource("1_aketk")
 monster_name = "Monster_0"
 texture = ExtResource("2_3s8g0")
-health = 1
-power = 1
+health = 20
+power = 8
 speed = 40
 metadata/_custom_type_script = "uid://brtcbnpn57rj7"

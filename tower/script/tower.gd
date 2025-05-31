@@ -2,8 +2,7 @@ class_name Towers
 extends StaticBody2D
 
 # 单个防御塔的代码，可朝向敌人，攻击离中心点最近的敌人
-var bullet:PackedScene=preload("res://bullet/bullet.tscn")
-var bullet_damage:int = 1
+var bullet:PackedScene = preload("res://bullet/tower_bullet.tscn")
 var current_targets:Array=[]
 var curr :CharacterBody2D
 var can_shoot:bool=true
@@ -11,12 +10,16 @@ var can_look:bool=true
 
 @onready var detection_area: Area2D = $Area2D
 @onready var range_visualizer: Node2D = $RangeVisualizer
+@onready var health_bar: ProgressBar = $HealthBar
 
-var health: int=100
+
+var health: int = 100
+var max_health: int = 100
+
+# 用哪种元素的子弹
+const bullet_stats = preload("res://bullet/tower_bullet/ice.tres")
 
 func _ready():
-	
-	#add_to_group("active_towers")
 	
 	# 初始化 RangeVisualizer 的形状并默认隐藏它
 	if is_instance_valid(range_visualizer) and range_visualizer.has_method("update_shape"):
@@ -31,6 +34,8 @@ func _ready():
 			print_debug("Tower: RangeVisualizer node not found or invalid.")
 		elif not range_visualizer.has_method("update_shape"):
 			print_debug("Tower: RangeVisualizer is missing 'update_shape' method.")
+			
+	update_health_bar()
 
 
 func _process(delta):
@@ -38,18 +43,29 @@ func _process(delta):
 		if can_look:
 			look_at(curr.global_position)
 		if can_shoot:
-			shoot()
+			shoot(bullet_stats)
 			can_shoot=false
 			$shootingCoolDown.start()
 	else:
 		for i in get_node("BulletContainer").get_child_count():
 			get_node("BulletContainer").get_child(i).queue_free()
+	
 
-
-func shoot()->void:
-	var temp_bullet:CharacterBody2D=bullet.instantiate()
+func shoot(stats: BulletStats)->void:
+	var temp_bullet:CharacterBody2D = bullet.instantiate()
+	
 	temp_bullet.target = curr
-	temp_bullet.bullet_Stats.power = bullet_damage
+	temp_bullet.is_tower_bullet = true
+	
+	temp_bullet.tower_bullet_damage = stats.damage 
+	temp_bullet.speed = stats.speed
+
+	if temp_bullet.has_node("Sprite2D"): 
+		var bullet_sprite: Sprite2D = temp_bullet.get_node("Sprite2D")
+		if stats.texture: 
+			bullet_sprite.texture = stats.texture
+		#print(bullet_sprite.texture)
+
 	get_node("BulletContainer").add_child(temp_bullet)
 	temp_bullet.global_position = $Aim.global_position
 
@@ -72,18 +88,18 @@ func choose_target(_current_targets:Array)->void:
 	
 	curr = current_target
 
+
 func tower_take_damage(damage:int)->void:
 	health -= damage
 	health = max(health, 0)
-	# update_health_bar()
 
+	update_health_bar()
+	
 	if health<=0:
 		queue_free()
 
 
-
 func _on_area_2d_body_entered(body):
-
 	if body.is_in_group("Enemy"):
 		current_targets.append(body)
 		choose_target(current_targets)
@@ -97,8 +113,15 @@ func _on_area_2d_body_exited(body):
 
 func _on_shooting_cool_down_timeout():
 	can_shoot=true
-# wzy
+
 
 func show_attack_range(is_visible: bool) -> void:
 	if is_instance_valid(range_visualizer):
 		range_visualizer.visible = is_visible
+
+func update_health_bar() -> void: # <--- 新增：更新血条的函数
+	if is_instance_valid(health_bar):
+		health_bar.max_value = max_health
+		health_bar.value = health
+		# 血量不满时显示，满血时隐藏
+		health_bar.visible = health < max_health

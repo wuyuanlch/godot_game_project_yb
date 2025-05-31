@@ -14,7 +14,7 @@ var max_health: int
 # 使用相对路径获取grid (Spawner子节点需要向上两级)
 @onready var grid: Node2D = $"../../Map"
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var health_bar: ProgressBar = $HealthBar		#敌人血条
+@onready var health_bar: ProgressBar = $HealthBar		
 
 var target_path : Array[Vector2i] = []
 var current_grid_pos: Vector2i  # 添加敌人当前网格位置
@@ -26,13 +26,15 @@ var towers_in_range: Array[Node2D] = [] # 范围内的防御塔数组
 
 const RECHECK_INTERVAL: float = 0.5 # 每隔1秒重新检查一次塔
 
-var bullet:PackedScene=preload("res://bullet/enemy_bullet.tscn")#攻击的子弹
-var curr :Node2D
-var bullet_damage:int = 2
-var can_shoot:bool=true
+var bullet: PackedScene=preload("res://bullet/enemy_bullet.tscn")
+var curr: Node2D
+var bullet_damage: int
+var can_shoot: bool=true
+
+const bullet_stats = preload("res://bullet/enemy_bullet/default.tres")
+
 
 func _ready():
-
 	# 从配置的类型中随机选择一个
 	current_monster_stats = available_monster_types.pick_random()
 	if current_monster_stats:
@@ -42,7 +44,6 @@ func _ready():
 		health = max_health
 		update_health_bar() 
 
-	#call_deferred("_init_path")
 	
 	# 初始化并启动用于重新检查防御塔的计时器
 	recheck_towers_timer = Timer.new()
@@ -127,8 +128,11 @@ func update_health_bar() -> void:
 		
 		if health <= 0:
 			health_bar.visible = false 
-			
-			
+	
+	# 受伤时才显示血条
+	health_bar.visible = health < max_health
+
+
 func apply_monster_stats(stats: MonsterStats):
 	if not is_instance_valid(stats):
 		return
@@ -141,7 +145,8 @@ func apply_monster_stats(stats: MonsterStats):
 	
 	if stats.texture:
 		sprite_2d.texture = stats.texture
-		
+	
+	bullet_damage = stats.power
 	update_health_bar()
 
 
@@ -194,18 +199,29 @@ func _physics_process(delta: float):
 func _process(delta):
 	if is_instance_valid(curr):
 		if can_shoot:
-			shoot()
+			shoot(bullet_stats)
 			can_shoot=false
 			$shootingCoolDown.start()
 
 #射击
-func shoot()->void:
+func shoot(stats: BulletStats)->void:
 	var temp_bullet:CharacterBody2D=bullet.instantiate()
+	
 	temp_bullet.target = curr
-	temp_bullet.bullet_Stats.power = bullet_damage
+	temp_bullet.is_enemy_bullet = true
+	
+	temp_bullet.tower_bullet_damage = stats.damage 
+	temp_bullet.speed = stats.speed
+
+	if temp_bullet.has_node("Sprite2D"): 
+		var bullet_sprite: Sprite2D = temp_bullet.get_node("Sprite2D")
+		if stats.texture: 
+			bullet_sprite.texture = stats.texture
+			
 	get_node("BulletContainer").add_child(temp_bullet)
 	temp_bullet.global_position = $Aim.global_position
-			
+
+
 func take_damage(damage:int)->void:
 	health -= damage
 	health = max(health, 0)
@@ -214,11 +230,13 @@ func take_damage(damage:int)->void:
 	if health<=0:
 		queue_free()
 
+
 func _on_attack_range_body_exited(body):
 	if body.is_in_group("active_towers"):
 		towers_in_range.erase(body)
 		if towers_in_range.is_empty():
 			update_target_and_path()  # 重新寻找目标并计算路径
+
 
 func _on_attack_range_body_entered(body):
 	if body.is_in_group("active_towers"):
