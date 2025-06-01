@@ -10,8 +10,8 @@ var can_look:bool=true
 
 @onready var detection_area: Area2D = $Area2D
 @onready var range_visualizer: Node2D = $RangeVisualizer
-@onready var tower_ui_parent: Node2D = $Node2D
-@onready var tower_actions_ui: Control = $Node2D/TowerActionsUI
+@onready var tower_ui_parent: Node2D = $D_U_node
+@onready var tower_actions_ui: Control = $D_U_node/TowerActionsUI
 @onready var hb_node: Node2D = $HB_node
 @onready var health_bar: ProgressBar = $HB_node/HealthBar
 
@@ -19,8 +19,8 @@ var can_look:bool=true
 var health: int = 100
 var max_health: int = 100
 
-# 用哪种元素的子弹
-const bullet_stats = preload("res://bullet/tower_bullet/ice.tres")
+# 加载哪种元素的子弹
+const bullet_stats = preload("res://bullet/tower_bullet/default.tres")
 
 func _ready():
 	
@@ -62,6 +62,7 @@ func _process(delta):
 	# 将这个中间 Node2D 的旋转设置为防御塔旋转的负值，以抵消防御塔的旋转
 	tower_ui_parent.rotation = -self.rotation
 	
+	# 同理防御塔血条不旋转
 	hb_node.rotation = -self.rotation
 
 

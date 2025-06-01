@@ -8,5 +8,5 @@ script = ExtResource("1_buh3i")
 bullet_name = "Unnamed Bullet"
 texture = ExtResource("2_d0lnb")
 damage = 5
-speed = 30
+speed = 40
 metadata/_custom_type_script = "uid://ddgvx72i2ivi5"

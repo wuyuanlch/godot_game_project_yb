@@ -44,7 +44,7 @@ tile_set = SubResource("TileSet_0i4oc")
 
 [node name="Spawner" type="Node2D" parent="." node_paths=PackedStringArray("grid")]
 script = ExtResource("3_xwkvk")
-spawn_count = 5
+spawn_interval = 5.0
 grid = NodePath("../Map")
 
 [node name="UI" type="CanvasLayer" parent="."]
