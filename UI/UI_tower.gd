@@ -26,7 +26,7 @@ func is_in_light_range(tile_pos: Vector2i) -> bool:
 
 func _on_gui_input(event):
 	if event is InputEventMouseMotion and event.button_mask == 1:
-		var mouse_pos = GlobalCamera.get_global_mouse_position()
+		var mouse_pos = GlobalCamera.get_global_mouse_position()# 可以直接用这个map.get_global_mouse_position()
 		var new_tile_pos = map.local_to_map(mouse_pos)
 
 		selection_map.clear()  # 清除之前的高亮
@@ -56,7 +56,7 @@ func _on_gui_input(event):
 	# 修复滚动键也可以放置塔
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 		#var mouse_pos1 = get_global_mouse_position()
-		var mouse_pos1 = GlobalCamera.get_global_mouse_position()
+		var mouse_pos1 = GlobalCamera.get_global_mouse_position()# 可以直接用这个map.get_global_mouse_position()
 		
 		current_highlighted_tile = map.local_to_map(mouse_pos1)
 		current_tile_pos = Vector2i(-1, -1)
