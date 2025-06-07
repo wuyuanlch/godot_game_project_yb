@@ -1,14 +1,19 @@
-[gd_scene load_steps=20 format=4 uid="uid://cnvsrn8b7wo3u"]
+[gd_scene load_steps=25 format=4 uid="uid://cnvsrn8b7wo3u"]
 
 [ext_resource type="Script" uid="uid://hcb3b54hu568" path="res://main/script/main.gd" id="1_3wy1v"]
 [ext_resource type="Script" uid="uid://b8b3phd1npjot" path="res://levels/level/hexTileMap.gd" id="1_c651c"]
 [ext_resource type="PackedScene" uid="uid://7q32vvyq3mpi" path="res://levels/levels/map.tscn" id="1_xwkvk"]
 [ext_resource type="Texture2D" uid="uid://c13mim7auo70b" path="res://tiles/tile_sprites/FDR_Ground_Tiles-export11.png" id="3_0i4oc"]
-[ext_resource type="Script" uid="uid://dyorv7bxgiadh" path="res://enemy/script/spawner.gd" id="3_xwkvk"]
+[ext_resource type="Script" uid="uid://dyorv7bxgiadh" path="res://enemy/spawner.gd" id="3_xwkvk"]
 [ext_resource type="Texture2D" uid="uid://dogo7qibb4oe2" path="res://tiles/tile_sprites/tile_001-export.png" id="4_grrlh"]
 [ext_resource type="Texture2D" uid="uid://cgjil7k2tmm88" path="res://tiles/tile_sprites/tile_002-export.png" id="5_0i4oc"]
 [ext_resource type="PackedScene" uid="uid://bner5pdayvns6" path="res://main/camera/main_camera.tscn" id="6_67ri8"]
 [ext_resource type="PackedScene" uid="uid://b34teb260bjyh" path="res://UI/UITower.tscn" id="6_kfbq2"]
+[ext_resource type="Script" uid="uid://cbvhmxbw3uspf" path="res://UI/pause_ui.gd" id="9_73k8k"]
+[ext_resource type="Theme" uid="uid://bx64jjwsvwpv1" path="res://UI/pause_theme.tres" id="9_na0o7"]
+[ext_resource type="Texture2D" uid="uid://24sd1sy0kpxc" path="res://tiles/assets/buttons/pause_normal.png" id="10_fwcvl"]
+[ext_resource type="Texture2D" uid="uid://bh2r42dodqdjh" path="res://tiles/assets/buttons/pause_pressed.png" id="11_na0o7"]
+[ext_resource type="Texture2D" uid="uid://yi7w7pfywlpq" path="res://tiles/assets/buttons/pause_hover.png" id="12_73k8k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bsumw"]
 texture = ExtResource("4_grrlh")
@@ -559,6 +564,89 @@ script = ExtResource("3_xwkvk")
 spawn_interval = 5.0
 grid = NodePath("../Map")
 
+[node name="PauseUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("pause_panel")]
+process_mode = 3
+script = ExtResource("9_73k8k")
+pause_panel = NodePath("Pause/PausePanel")
+
+[node name="Pause" type="Control" parent="PauseUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_na0o7")
+
+[node name="PauseButton" type="TextureButton" parent="PauseUI/Pause"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -16.0
+offset_bottom = 16.0
+grow_horizontal = 0
+focus_mode = 0
+texture_normal = ExtResource("10_fwcvl")
+texture_pressed = ExtResource("11_na0o7")
+texture_hover = ExtResource("12_73k8k")
+
+[node name="PausePanel" type="Panel" parent="PauseUI/Pause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="PauseUI/Pause/PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -41.0
+offset_right = 36.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PAUSED"
+
+[node name="ResumeButton" type="Button" parent="PauseUI/Pause/PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -8.0
+offset_right = 31.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+text = "Resume"
+
+[node name="QuitButton" type="Button" parent="PauseUI/Pause/PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = 17.0
+offset_right = 31.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+text = "Quit"
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="UI"]
@@ -584,3 +672,6 @@ selection_map = NodePath("../../../../Map/SelectionOverLayer")
 [node name="PreviewTowers" type="Node2D" parent="."]
 
 [connection signal="input_event" from="Map/Empty_Area" to="Map" method="_on_empty_area_input_event"]
+[connection signal="pressed" from="PauseUI/Pause/PauseButton" to="PauseUI" method="pause"]
+[connection signal="pressed" from="PauseUI/Pause/PausePanel/ResumeButton" to="PauseUI" method="unpause"]
+[connection signal="pressed" from="PauseUI/Pause/PausePanel/QuitButton" to="PauseUI" method="quit_game"]

@@ -3,7 +3,7 @@ extends CharacterBody2D
 ## 怪物类型数据数组
 #在 enemy.tscn 场景配置这个数组，填入多个 MonsterStats 资源
 @export var available_monster_types: Array[MonsterStats]
-@export var floating_text_scene: PackedScene
+@export var floating_text_scene: PackedScene=preload("res://enemy/floating_text.tscn")
 
 ## 运行时确定的怪物属性 (不再 @export)
 var current_monster_stats: MonsterStats 
@@ -231,6 +231,7 @@ func take_damage(damage:int)->void:
 	add_child(floating_text)			# 需要先add child把节点加入场景树后才能初始化Label，然后后续才能访问Label.text
 	floating_text.display_damage_text(damage)
 	floating_text.global_position = global_position + Vector2.UP * 8
+	
 	
 	update_health_bar()
 
