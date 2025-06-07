@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://i4f3h3k83t62"]
+
+[ext_resource type="Script" uid="uid://33f5205g3k8p" path="res://enemy/script/floating_text.gd" id="1_stht5"]
+[ext_resource type="FontFile" uid="uid://cebqi2rhbl1kj" path="res://tiles/assets/front/Silver.ttf" id="2_tg1mr"]
+
+[node name="FloatingText" type="Node2D"]
+script = ExtResource("1_stht5")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(40, 16)
+offset_left = -10.0
+offset_top = -6.0
+offset_right = 30.0
+offset_bottom = 15.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("2_tg1mr")
+theme_override_font_sizes/font_size = 19
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -6,11 +6,15 @@ extends NinePatchRect
 @export var towers_node:Node2D# 专门放置防御塔的节点
 @export var preview_towers_node:Node2D#专门放置预览塔的节点
 @export var selection_map: TileMapLayer#高亮区的变色节点
+@onready var point_light: PointLight2D = $"../../../../Map/CanBuildArea"
 
 var current_highlighted_tile = null
 var preview_tower
 var current_tile_pos: Vector2i = Vector2i(-1, -1)
+var map_light_radius_squared: float = 0.0
 
+func _ready() -> void:
+	update_map_light_radius()
 
 #func is_in_light_range(tile_pos: Vector2i) -> bool:
 	#var mouse_pos = map.map_to_local(tile_pos)
@@ -29,9 +33,14 @@ var current_tile_pos: Vector2i = Vector2i(-1, -1)
 				#
 	#return false
 
-func is_in_light_range(tile_pos: Vector2i) -> bool:
+func is_in_light_range(tile_pos: Vector2i) -> bool:	
 	var global_pos = map.to_global(map.map_to_local(tile_pos))
 	
+	# 初始光源判断
+	if is_instance_valid(point_light): 
+		if global_pos.distance_squared_to(point_light.global_position) <= map_light_radius_squared:
+			return true
+			
 	for tower_node in towers_node.get_children():
 		# 直接访问塔自己算好的半径平方值 (light_radius_squared)，而不需要每次调用一次该函数就计算一次
 		if global_pos.distance_squared_to(tower_node.global_position) <= tower_node.light_radius_squared:
@@ -111,3 +120,15 @@ func has_tower(tile_pos: Vector2i) -> bool:
 			return true
 	return false
 # wzy
+
+
+func update_map_light_radius():
+	if not is_instance_valid(point_light):
+		map_light_radius_squared = 0.0 
+		return
+
+	const LIGHT_RADIUS_MULTIPLIER = 31.0
+	
+	var radius = point_light.texture_scale * LIGHT_RADIUS_MULTIPLIER * sqrt(point_light.height)
+	
+	map_light_radius_squared = pow(radius, 2)

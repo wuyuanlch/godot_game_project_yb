@@ -183,7 +183,7 @@ func show_attack_range(is_visible: bool) -> void:
 		range_visualizer.visible = is_visible
 
 
-func update_health_bar() -> void: # <--- 新增：更新血条的函数
+func update_health_bar() -> void: 
 	if is_instance_valid(health_bar):
 		health_bar.max_value = max_health
 		health_bar.value = health

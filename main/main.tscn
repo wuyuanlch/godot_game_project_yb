@@ -1,15 +1,14 @@
-[gd_scene load_steps=19 format=4 uid="uid://cnvsrn8b7wo3u"]
+[gd_scene load_steps=20 format=4 uid="uid://cnvsrn8b7wo3u"]
 
 [ext_resource type="Script" uid="uid://hcb3b54hu568" path="res://main/script/main.gd" id="1_3wy1v"]
 [ext_resource type="Script" uid="uid://b8b3phd1npjot" path="res://levels/level/hexTileMap.gd" id="1_c651c"]
 [ext_resource type="PackedScene" uid="uid://7q32vvyq3mpi" path="res://levels/levels/map.tscn" id="1_xwkvk"]
 [ext_resource type="Texture2D" uid="uid://c13mim7auo70b" path="res://tiles/tile_sprites/FDR_Ground_Tiles-export11.png" id="3_0i4oc"]
-[ext_resource type="Script" uid="uid://dyorv7bxgiadh" path="res://enemy/spawner.gd" id="3_xwkvk"]
+[ext_resource type="Script" uid="uid://dyorv7bxgiadh" path="res://enemy/script/spawner.gd" id="3_xwkvk"]
 [ext_resource type="Texture2D" uid="uid://dogo7qibb4oe2" path="res://tiles/tile_sprites/tile_001-export.png" id="4_grrlh"]
 [ext_resource type="Texture2D" uid="uid://cgjil7k2tmm88" path="res://tiles/tile_sprites/tile_002-export.png" id="5_0i4oc"]
 [ext_resource type="PackedScene" uid="uid://bner5pdayvns6" path="res://main/camera/main_camera.tscn" id="6_67ri8"]
 [ext_resource type="PackedScene" uid="uid://b34teb260bjyh" path="res://UI/UITower.tscn" id="6_kfbq2"]
-[ext_resource type="PackedScene" uid="uid://brr5q5nfh47o7" path="res://tower/tower.tscn" id="9_grrlh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bsumw"]
 texture = ExtResource("4_grrlh")
@@ -26,6 +25,21 @@ tile_shape = 3
 tile_size = Vector2i(20, 20)
 sources/5 = SubResource("TileSetAtlasSource_bsumw")
 sources/6 = SubResource("TileSetAtlasSource_fwcvl")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0i4oc"]
+size = Vector2(428, 240)
+
+[sub_resource type="Gradient" id="Gradient_0i4oc"]
+offsets = PackedFloat32Array(0.792208, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bsumw"]
+gradient = SubResource("Gradient_0i4oc")
+width = 160
+height = 160
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_na0o7"]
 texture = ExtResource("3_0i4oc")
@@ -497,9 +511,6 @@ texture = ExtResource("3_0i4oc")
 [sub_resource type="TileSet" id="TileSet_bsumw"]
 sources/0 = SubResource("TileSetAtlasSource_0i4oc")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0i4oc"]
-size = Vector2(428, 240)
-
 [node name="Main" type="Node2D"]
 script = ExtResource("1_3wy1v")
 
@@ -516,7 +527,20 @@ modulate = Color(1, 1, 1, 0.694118)
 tile_set = SubResource("TileSet_0i4oc")
 
 [node name="Fog" type="CanvasModulate" parent="Map"]
-color = Color(0.0514278, 0.175545, 0.228507, 1)
+color = Color(0.0121452, 0.0705829, 0.0994773, 1)
+
+[node name="Empty_Area" type="Area2D" parent="Map"]
+z_index = -2
+position = Vector2(11, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Empty_Area"]
+position = Vector2(203, 110)
+shape = SubResource("RectangleShape2D_0i4oc")
+
+[node name="CanBuildArea" type="PointLight2D" parent="Map"]
+position = Vector2(232, 117)
+texture = SubResource("GradientTexture2D_bsumw")
+height = 5.0
 
 [node name="MapBaseLayer" type="TileMapLayer" parent="Map"]
 visible = false
@@ -527,14 +551,6 @@ tile_set = SubResource("TileSet_grrlh")
 visible = false
 tile_map_data = PackedByteArray("AAAIAAUAAAAMAAAAAAAIAAYAAAAMAAEAAAAIAAcAAAAMAAEAAAAIAAgAAAAMAAIAAAAJAAUAAAAQAAIAAAAJAAYAAAANAAEAAAAJAAcAAAANAAEAAAAJAAgAAAANAAIAAAAKAAQAAAAMAAAAAAAKAAUAAAARAAIAAAAKAAYAAAANAAEAAAAKAAcAAAANAAEAAAAKAAgAAAARAAAAAAAKAAkAAAARAAEAAAAKAAoAAAAMAAIAAAALAAMAAAAMAAEAAAALAAQAAAARAAIAAAALAAUAAAANAAEAAAALAAYAAAANAAEAAAALAAcAAAANAAEAAAALAAgAAAANAAEAAAALAAkAAAANAAEAAAALAAoAAAARAAAAAAALAAsAAAAMAAIAAAAMAAMAAAATAAEAAAAMAAQAAAATAAEAAAAMAAUAAAANAAEAAAAMAAYAAAANAAEAAAAMAAcAAAANAAEAAAAMAAgAAAANAAEAAAAMAAkAAAANAAEAAAAMAAoAAAANAAEAAAAMAAsAAAANAAIAAAANAAMAAAATAAEAAAANAAQAAAANAAEAAAANAAUAAAANAAEAAAANAAYAAAANAAEAAAANAAcAAAANAAEAAAANAAgAAAANAAEAAAANAAkAAAANAAEAAAANAAoAAAANAAEAAAANAAsAAAANAAIAAAAOAAMAAAATAAEAAAAOAAQAAAATAAEAAAAOAAUAAAATAAEAAAAOAAYAAAANAAEAAAAOAAcAAAANAAEAAAAOAAgAAAANAAEAAAAOAAkAAAANAAEAAAAOAAoAAAANAAEAAAAOAAsAAAARAAAAAAAOAAwAAAARAAEAAAAOAA0AAAAMAAIAAAAPAAMAAAATAAEAAAAPAAQAAAATAAEAAAAPAAUAAAATAAEAAAAPAAYAAAANAAEAAAAPAAcAAAANAAEAAAAPAAgAAAANAAEAAAAPAAkAAAANAAEAAAAPAAoAAAANAAEAAAAPAAsAAAANAAEAAAAPAAwAAAANAAEAAAAPAA0AAAANAAIAAAAQAAYAAAATAAEAAAAQAAcAAAANAAEAAAAQAAgAAAANAAEAAAAQAAkAAAANAAEAAAAQAAoAAAANAAEAAAAQAAsAAAANAAEAAAAQAAwAAAANAAEAAAAQAA0AAAANAAIAAAARAAcAAAATAAEAAAARAAgAAAANAAEAAAARAAkAAAANAAEAAAARAAoAAAANAAEAAAARAAsAAAANAAEAAAARAAwAAAANAAEAAAARAA0AAAANAAIAAAASAAgAAAANAAEAAAASAAkAAAANAAEAAAASAAoAAAANAAEAAAASAAsAAAANAAEAAAASAAwAAAANAAEAAAATAAgAAAATAAEAAAATAAkAAAANAAEAAAATAAoAAAANAAEAAAATAAsAAAAPAAAAAAALAAIAAAAMAAAAAAAMAAIAAAANAAAAAAANAAIAAAANAAAAAAAOAAIAAAANAAAAAAAPAAIAAAANAAAAAAAQAAIAAAANAAAAAAAQAAMAAAATAAEAAAAQAAQAAAATAAEAAAAQAAUAAAATAAEAAAARAAIAAAAOAAAAAAARAAMAAAAOAAEAAAARAAQAAAAOAAEAAAARAAUAAAAPAAIAAAARAAYAAAATAAEAAAASAAUAAAAOAAAAAAASAAYAAAATAAEAAAASAAcAAAATAAEAAAASAA0AAAANAAIAAAATAAYAAAAOAAAAAAATAAcAAAAPAAIAAAATAAwAAAAPAAEAAAATAA0AAAAOAAIAAAAUAAcAAAANAAAAAAAUAAgAAAATAAEAAAAUAAkAAAANAAEAAAAUAAoAAAAPAAAAAAAUAAsAAAAOAAIAAAAVAAcAAAAOAAAAAAAVAAgAAAAOAAEAAAAVAAkAAAAOAAEAAAAVAAoAAAAOAAIAAAA=")
 tile_set = SubResource("TileSet_bsumw")
-
-[node name="Empty_Area" type="Area2D" parent="Map"]
-z_index = -2
-position = Vector2(11, 10)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Empty_Area"]
-position = Vector2(203, 110)
-shape = SubResource("RectangleShape2D_0i4oc")
 
 [node name="Camera" parent="." instance=ExtResource("6_67ri8")]
 
@@ -564,9 +580,6 @@ preview_towers_node = NodePath("../../../../PreviewTowers")
 selection_map = NodePath("../../../../Map/SelectionOverLayer")
 
 [node name="Towers" type="Node2D" parent="."]
-
-[node name="Tower" parent="Towers" instance=ExtResource("9_grrlh")]
-position = Vector2(227, 106)
 
 [node name="PreviewTowers" type="Node2D" parent="."]
 
