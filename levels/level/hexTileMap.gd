@@ -19,4 +19,11 @@ func _ready():
 			var tile_data:=base_layer.get_cell_tile_data(coord)
 			if tile_data and tile_data.get_custom_data("unwalkable"):
 				astar.set_point_solid(coord)
-# wzy
+
+
+
+
+func _on_empty_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		SelectionManager.deselect_all()

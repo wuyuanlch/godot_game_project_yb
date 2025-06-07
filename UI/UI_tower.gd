@@ -12,16 +12,31 @@ var preview_tower
 var current_tile_pos: Vector2i = Vector2i(-1, -1)
 
 
+#func is_in_light_range(tile_pos: Vector2i) -> bool:
+	#var mouse_pos = map.map_to_local(tile_pos)
+	#var global_pos = map.to_global(mouse_pos)
+	#
+	#for tower_node in towers_node.get_children():
+		#var light = tower_node.get_node_or_null("PointLight2D")
+		#
+		#if light:
+			## 这里优化一下，避免sqrt运算，减少计算开销
+			## var light_radius = light.texture_scale * 7 * sqrt(light.height)  # 估算灯光半径
+			#var light_radius_squared = pow(light.texture_scale * 7 * sqrt(light.height), 2)
+#
+			#if global_pos.distance_squared_to(tower_node.global_position) <= light_radius_squared:
+				#return true
+				#
+	#return false
+
 func is_in_light_range(tile_pos: Vector2i) -> bool:
-	var mouse_pos = map.map_to_local(tile_pos)
-	var global_pos = map.to_global(mouse_pos)
+	var global_pos = map.to_global(map.map_to_local(tile_pos))
 	
 	for tower_node in towers_node.get_children():
-		var light = tower_node.get_node_or_null("PointLight2D")
-		if light:
-			var light_radius = light.texture_scale * 7 * sqrt(light.height)  # 估算灯光半径
-			if global_pos.distance_to(tower_node.global_position) <= light_radius:
-				return true
+		# 直接访问塔自己算好的半径平方值 (light_radius_squared)，而不需要每次调用一次该函数就计算一次
+		if global_pos.distance_squared_to(tower_node.global_position) <= tower_node.light_radius_squared:
+			return true
+			
 	return false
 
 func _on_gui_input(event):
