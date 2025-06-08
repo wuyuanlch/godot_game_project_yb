@@ -32,7 +32,6 @@ radius = 16.0312
 [node name="enemy" type="CharacterBody2D" groups=["Enemy"]]
 texture_filter = 1
 collision_layer = 2
-collision_mask = 3
 script = ExtResource("1_ofsxj")
 available_monster_types = Array[ExtResource("2_1wwld")]([ExtResource("3_y5vj3"), ExtResource("4_5ffra"), ExtResource("5_e355f")])
 
