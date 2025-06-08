@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://bx64jjwsvwpv1"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://bx64jjwsvwpv1"]
 
 [ext_resource type="Texture2D" uid="uid://bwh7nncbvu0nj" path="res://tiles/assets/buttons/button_hover.png" id="1_nuhm7"]
 [ext_resource type="Texture2D" uid="uid://bitj7qtr7x2d0" path="res://tiles/assets/buttons/button_normal.png" id="2_25rbk"]
@@ -28,8 +28,11 @@ texture_margin_top = 4.0
 texture_margin_right = 4.0
 texture_margin_bottom = 6.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nf8w7"]
-bg_color = Color(0, 0, 0, 0.501961)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nuhm7"]
+bg_color = Color(0.445614, 0.492317, 0.817475, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_25rbk"]
+bg_color = Color(0.587966, 0.621376, 0.906475, 1)
 
 [resource]
 default_font = ExtResource("4_wo7bw")
@@ -39,4 +42,6 @@ Button/styles/focus = SubResource("StyleBoxEmpty_nuhm7")
 Button/styles/hover = SubResource("StyleBoxTexture_cx68f")
 Button/styles/normal = SubResource("StyleBoxTexture_kfot8")
 Button/styles/pressed = SubResource("StyleBoxTexture_6ulf1")
-Panel/styles/panel = SubResource("StyleBoxFlat_nf8w7")
+Panel/styles/Pause = SubResource("StyleBoxFlat_nuhm7")
+StartPanel/base_type = &"Panel"
+StartPanel/styles/panel = SubResource("StyleBoxFlat_25rbk")

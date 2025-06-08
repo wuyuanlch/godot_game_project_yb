@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://db7t02pms4t1t"]
 
-[ext_resource type="Script" uid="uid://ckn6bou6o8obb" path="res://enemy/enemy.gd" id="1_ofsxj"]
+[ext_resource type="Script" uid="uid://ckn6bou6o8obb" path="res://enemy/script/enemy.gd" id="1_ofsxj"]
 [ext_resource type="Script" uid="uid://brtcbnpn57rj7" path="res://enemy/monster_types/MonsterStats.gd" id="2_1wwld"]
 [ext_resource type="Resource" uid="uid://c0a7qx7sf6ymi" path="res://enemy/monster_types/monster_0.tres" id="3_y5vj3"]
 [ext_resource type="Resource" uid="uid://d11bhd0mvoovp" path="res://enemy/monster_types/monster_1.tres" id="4_5ffra"]
