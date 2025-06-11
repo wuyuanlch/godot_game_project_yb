@@ -75,10 +75,15 @@ func _on_gui_input(event):
 		if not preview_tower:
 			preview_tower = tower.instantiate()
 			preview_tower.set_process(false)
+
 			preview_tower.can_look=false			# 预览塔转向暂停
 			preview_tower.can_shoot=false		# 预览塔射击暂停
 			preview_tower.get_node("PointLight2D").visible=false
+			preview_tower.get_node("CollisionShape2D").set_deferred("disabled", true)
+
 			preview_towers_node.add_child(preview_tower)
+			
+			
 			
 			# 显示预览塔的攻击范围 
 			if preview_tower.has_method("show_attack_range"):
