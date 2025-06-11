@@ -7,6 +7,7 @@ var current_targets:Array=[]
 var curr :CharacterBody2D
 var can_shoot:bool=true
 var can_look:bool=true
+var light_radius_squared: float = 0.0
 
 @onready var detection_area: Area2D = $Area2D
 @onready var range_visualizer: Node2D = $RangeVisualizer
@@ -14,6 +15,7 @@ var can_look:bool=true
 @onready var tower_actions_ui: Control = $D_U_node/TowerActionsUI
 @onready var hb_node: Node2D = $HB_node
 @onready var health_bar: ProgressBar = $HB_node/HealthBar
+@onready var point_light: PointLight2D = $PointLight2D
 
 
 var health: int = 100
@@ -45,6 +47,9 @@ func _ready():
 		tower_actions_ui.visible = false
 	
 	input_pickable = true
+	
+	# 在塔创建时，计算并缓存光照半径
+	update_light_radius()
 
 
 func _process(delta):
@@ -70,7 +75,9 @@ func _input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	# 检查是否是鼠标左键按下事件
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		# 当 _input_event 触发时，意味着鼠标已经点击到这个StaticBody2D的碰撞形状上
-		show_tower_actions_ui(true)
+		#show_tower_actions_ui(true)
+		#show_attack_range(true)
+		SelectionManager.select(self)
 		
 		# 标记事件为已处理，防止其他物体也接收到这个点击事件
 		get_viewport().set_input_as_handled()
@@ -143,6 +150,18 @@ func tower_take_damage(damage:int)->void:
 		queue_free()
 
 
+func update_light_radius():
+	if not is_instance_valid(point_light):
+		light_radius_squared = 0.0 
+		return
+
+	const LIGHT_RADIUS_MULTIPLIER = 7.0
+	
+	var radius = point_light.texture_scale * LIGHT_RADIUS_MULTIPLIER * sqrt(point_light.height)
+	
+	light_radius_squared = pow(radius, 2)
+
+
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("Enemy"):
 		current_targets.append(body)
@@ -164,7 +183,7 @@ func show_attack_range(is_visible: bool) -> void:
 		range_visualizer.visible = is_visible
 
 
-func update_health_bar() -> void: # <--- 新增：更新血条的函数
+func update_health_bar() -> void: 
 	if is_instance_valid(health_bar):
 		health_bar.max_value = max_health
 		health_bar.value = health
@@ -173,10 +192,29 @@ func update_health_bar() -> void: # <--- 新增：更新血条的函数
 
 
 func _on_delete_button_pressed() -> void:
-	show_tower_actions_ui(false) 
+	#show_tower_actions_ui(false)
+	#show_attack_range(false)
+	SelectionManager.deselect_all()
 	queue_free()
 	
 
 func _on_upgrade_button_pressed() -> void:
-	show_tower_actions_ui(false) 
+	#show_tower_actions_ui(false)
+	#show_attack_range(false)
+	SelectionManager.deselect_all()
 	print("防御塔被升级！")
+
+	# 如果升级会影响到灯光（比如范围变大），那就在这里重新计算一次
+	# 假设升级会改变 point_light 的 height 或 texture_scale
+	# get_tree().create_timer(0.1).timeout.connect(update_light_radius) # 延迟一点点调用，确保升级属性已生效
+	# update_light_radius() 
+
+
+func select():
+	show_tower_actions_ui(true)
+	show_attack_range(true)
+
+
+func deselect():
+	show_tower_actions_ui(false)
+	show_attack_range(false)

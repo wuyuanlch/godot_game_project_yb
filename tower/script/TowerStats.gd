@@ -13,3 +13,4 @@ class_name TowerStats
 # 后续可能的新设定
 # @export var defense
 # @export var characteristic
+# @export var shoot_area

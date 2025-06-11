@@ -1,9 +1,9 @@
-class_name Enemies
 extends CharacterBody2D
 
 ## 怪物类型数据数组
 #在 enemy.tscn 场景配置这个数组，填入多个 MonsterStats 资源
 @export var available_monster_types: Array[MonsterStats]
+var floating_text_scene: PackedScene=preload("res://enemy/floating_text.tscn")
 
 ## 运行时确定的怪物属性 (不再 @export)
 var current_monster_stats: MonsterStats 
@@ -34,10 +34,6 @@ var can_shoot: bool=true
 
 const bullet_stats = preload("res://bullet/enemy_bullet/default.tres")
 
-# 动画
-@export var state_machine_node:Node
-@export var animPlayer:AnimatedSprite2D
-@export var chaseArea:Area2D
 
 func _ready():
 	# 从配置的类型中随机选择一个
@@ -185,8 +181,7 @@ func _physics_process(delta: float):
 		
 		var direction: Vector2 = (target_world_position - global_position).normalized()
 		velocity = direction * speed
-		move_and_slide()
-		flip()
+		move_and_slide() 
 
 		# 检查是否到达路径点
 		if global_position.distance_to(target_world_position) < 4.0:
@@ -231,18 +226,17 @@ func shoot(stats: BulletStats)->void:
 func take_damage(damage:int)->void:
 	health -= damage
 	health = max(health, 0)
+	
+	var floating_text: Node2D = floating_text_scene.instantiate()
+	add_child(floating_text)			# 需要先add child把节点加入场景树后才能初始化Label，然后后续才能访问Label.text
+	floating_text.display_damage_text(damage)
+	floating_text.global_position = global_position + Vector2.UP * 8
+	
+	
 	update_health_bar()
 
 	if health<=0:
 		queue_free()
-
-# 面朝向
-func flip()->void:
-	var isNotMovingHorizontally:bool=velocity.x==0
-	if isNotMovingHorizontally:
-		return
-	var isMovingLeft:bool=velocity.x<0
-	animPlayer.flip_h=isMovingLeft
 
 
 func _on_attack_range_body_exited(body):

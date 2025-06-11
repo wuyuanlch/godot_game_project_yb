@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://cnvsrn8b7wo3u"]
+[gd_scene load_steps=27 format=4 uid="uid://cnvsrn8b7wo3u"]
 
 [ext_resource type="Script" uid="uid://hcb3b54hu568" path="res://main/script/main.gd" id="1_3wy1v"]
 [ext_resource type="Script" uid="uid://b8b3phd1npjot" path="res://levels/level/hexTileMap.gd" id="1_c651c"]
@@ -9,7 +9,13 @@
 [ext_resource type="Texture2D" uid="uid://cgjil7k2tmm88" path="res://tiles/tile_sprites/tile_002-export.png" id="5_0i4oc"]
 [ext_resource type="PackedScene" uid="uid://bner5pdayvns6" path="res://main/camera/main_camera.tscn" id="6_67ri8"]
 [ext_resource type="PackedScene" uid="uid://b34teb260bjyh" path="res://UI/UITower.tscn" id="6_kfbq2"]
-[ext_resource type="PackedScene" uid="uid://brr5q5nfh47o7" path="res://tower/tower.tscn" id="9_grrlh"]
+[ext_resource type="Script" uid="uid://cbvhmxbw3uspf" path="res://UI/pause_ui.gd" id="9_73k8k"]
+[ext_resource type="Theme" uid="uid://bx64jjwsvwpv1" path="res://UI/pause_theme.tres" id="9_na0o7"]
+[ext_resource type="Texture2D" uid="uid://24sd1sy0kpxc" path="res://tiles/assets/buttons/pause_normal.png" id="10_fwcvl"]
+[ext_resource type="Texture2D" uid="uid://bh2r42dodqdjh" path="res://tiles/assets/buttons/pause_pressed.png" id="11_na0o7"]
+[ext_resource type="Texture2D" uid="uid://yi7w7pfywlpq" path="res://tiles/assets/buttons/pause_hover.png" id="12_73k8k"]
+[ext_resource type="FontFile" uid="uid://bydfh0blmt8lh" path="res://tiles/assets/front/ark-pixel-12px-monospaced-zh_cn.ttf" id="15_5xyti"]
+[ext_resource type="Script" uid="uid://qcvhwi2ffkxt" path="res://UI/start_ui.gd" id="15_n3o0a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bsumw"]
 texture = ExtResource("4_grrlh")
@@ -26,6 +32,21 @@ tile_shape = 3
 tile_size = Vector2i(20, 20)
 sources/5 = SubResource("TileSetAtlasSource_bsumw")
 sources/6 = SubResource("TileSetAtlasSource_fwcvl")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0i4oc"]
+size = Vector2(428, 240)
+
+[sub_resource type="Gradient" id="Gradient_0i4oc"]
+offsets = PackedFloat32Array(0.792208, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bsumw"]
+gradient = SubResource("Gradient_0i4oc")
+width = 160
+height = 160
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_na0o7"]
 texture = ExtResource("3_0i4oc")
@@ -512,8 +533,21 @@ tile_map_data = PackedByteArray("AAACAAMAAAAAAAAAAAADAAQAAAAAAAAAAAACAAUAAAAAAAA
 modulate = Color(1, 1, 1, 0.694118)
 tile_set = SubResource("TileSet_0i4oc")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="Map"]
-color = Color(0.0885599, 0.0885599, 0.0885599, 1)
+[node name="Fog" type="CanvasModulate" parent="Map"]
+color = Color(0.0121452, 0.0705829, 0.0994773, 1)
+
+[node name="Empty_Area" type="Area2D" parent="Map"]
+z_index = -2
+position = Vector2(11, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Empty_Area"]
+position = Vector2(203, 110)
+shape = SubResource("RectangleShape2D_0i4oc")
+
+[node name="CanBuildArea" type="PointLight2D" parent="Map"]
+position = Vector2(232, 117)
+texture = SubResource("GradientTexture2D_bsumw")
+height = 5.0
 
 [node name="MapBaseLayer" type="TileMapLayer" parent="Map"]
 visible = false
@@ -531,6 +565,90 @@ tile_set = SubResource("TileSet_bsumw")
 script = ExtResource("3_xwkvk")
 spawn_interval = 5.0
 grid = NodePath("../Map")
+
+[node name="PauseUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("pause_panel")]
+process_mode = 3
+script = ExtResource("9_73k8k")
+pause_panel = NodePath("Pause/PausePanel")
+
+[node name="Pause" type="Control" parent="PauseUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("9_na0o7")
+
+[node name="PauseButton" type="TextureButton" parent="PauseUI/Pause"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -16.0
+offset_bottom = 16.0
+grow_horizontal = 0
+focus_mode = 0
+texture_normal = ExtResource("10_fwcvl")
+texture_pressed = ExtResource("11_na0o7")
+texture_hover = ExtResource("12_73k8k")
+
+[node name="PausePanel" type="Panel" parent="PauseUI/Pause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="PauseUI/Pause/PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -41.0
+offset_right = 36.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PAUSED"
+
+[node name="ResumeButton" type="Button" parent="PauseUI/Pause/PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -8.0
+offset_right = 31.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+text = "Resume"
+
+[node name="QuitButton" type="Button" parent="PauseUI/Pause/PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = 17.0
+offset_right = 31.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+text = "Quit"
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -552,9 +670,77 @@ towers_node = NodePath("../../../../Towers")
 preview_towers_node = NodePath("../../../../PreviewTowers")
 selection_map = NodePath("../../../../Map/SelectionOverLayer")
 
+[node name="StartUI" type="CanvasLayer" parent="."]
+script = ExtResource("15_n3o0a")
+
+[node name="Panel" type="Panel" parent="StartUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_na0o7")
+theme_type_variation = &"StartPanel"
+
+[node name="Label" type="Label" parent="StartUI/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -35.0
+offset_right = 36.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("15_5xyti")
+theme_override_font_sizes/font_size = 12
+text = "游戏开始界面"
+
+[node name="StartButton" type="Button" parent="StartUI/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -9.0
+offset_right = 31.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_na0o7")
+text = "Start"
+
+[node name="QuitButton" type="Button" parent="StartUI/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = 17.0
+offset_right = 31.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_na0o7")
+text = "Quit"
+
 [node name="Towers" type="Node2D" parent="."]
 
 [node name="Tower" parent="Towers" instance=ExtResource("9_grrlh")]
 position = Vector2(227, 106)
 
 [node name="PreviewTowers" type="Node2D" parent="."]
+
+[connection signal="input_event" from="Map/Empty_Area" to="Map" method="_on_empty_area_input_event"]
+[connection signal="pressed" from="PauseUI/Pause/PauseButton" to="PauseUI" method="pause"]
+[connection signal="pressed" from="PauseUI/Pause/PausePanel/ResumeButton" to="PauseUI" method="unpause"]
+[connection signal="pressed" from="PauseUI/Pause/PausePanel/QuitButton" to="PauseUI" method="quit_game"]
+[connection signal="pressed" from="StartUI/Panel/StartButton" to="StartUI" method="start"]
+[connection signal="pressed" from="StartUI/Panel/QuitButton" to="StartUI" method="quit_game"]
