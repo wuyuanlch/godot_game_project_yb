@@ -16,7 +16,6 @@ var light_radius_squared: float = 0.0
 @onready var hb_node: Node2D = $HB_node
 @onready var health_bar: ProgressBar = $HB_node/HealthBar
 @onready var point_light: PointLight2D = $PointLight2D
-@onready var sprite: Sprite2D = $Sprite2D
 
 
 var health: int = 100
@@ -56,7 +55,7 @@ func _ready():
 func _process(delta):
 	if is_instance_valid(curr):
 		if can_look:
-			sprite.look_at(curr.global_position)
+			look_at(curr.global_position)
 		if can_shoot:
 			shoot(bullet_stats)
 			can_shoot=false

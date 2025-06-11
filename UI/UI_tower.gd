@@ -48,18 +48,6 @@ func is_in_light_range(tile_pos: Vector2i) -> bool:
 			
 	return false
 
-func is_in_light_range(tile_pos: Vector2i) -> bool:
-	var mouse_pos = map.map_to_local(tile_pos)
-	var global_pos = map.to_global(mouse_pos)
-	
-	for tower_node in towers_node.get_children():
-		var light = tower_node.get_node_or_null("PointLight2D")
-		if light:
-			var light_radius = light.texture_scale * 7 * sqrt(light.height)  # 估算灯光半径
-			if global_pos.distance_to(tower_node.global_position) <= light_radius:
-				return true
-	return false
-
 func _on_gui_input(event):
 	if event is InputEventMouseMotion and event.button_mask == 1:
 		var mouse_pos = GlobalCamera.get_global_mouse_position()# 可以直接用这个map.get_global_mouse_position()
@@ -75,15 +63,10 @@ func _on_gui_input(event):
 		if not preview_tower:
 			preview_tower = tower.instantiate()
 			preview_tower.set_process(false)
-
 			preview_tower.can_look=false			# 预览塔转向暂停
 			preview_tower.can_shoot=false		# 预览塔射击暂停
 			preview_tower.get_node("PointLight2D").visible=false
-			preview_tower.get_node("CollisionShape2D").set_deferred("disabled", true)
-
 			preview_towers_node.add_child(preview_tower)
-			
-			
 			
 			# 显示预览塔的攻击范围 
 			if preview_tower.has_method("show_attack_range"):

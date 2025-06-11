@@ -117,7 +117,7 @@ icon = ExtResource("5_vplrr")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 blend_mode = 2
 texture = SubResource("GradientTexture2D_vplrr")
-texture_scale = 6.25
+texture_scale = 4.0
 height = 5.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
