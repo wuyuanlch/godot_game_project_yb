@@ -634,7 +634,7 @@ grow_vertical = 2
 focus_mode = 0
 text = "Resume"
 
-[node name="QuitButton" type="Button" parent="PauseUI/Pause/PausePanel"]
+[node name="SaveButton" type="Button" parent="PauseUI/Pause/PausePanel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -645,6 +645,38 @@ offset_left = -31.0
 offset_top = 17.0
 offset_right = 31.0
 offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+text = "Save"
+
+[node name="LoadButton" type="Button" parent="PauseUI/Pause/PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = 42.0
+offset_right = 31.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_na0o7")
+text = "Load"
+
+[node name="QuitButton" type="Button" parent="PauseUI/Pause/PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = 67.0
+offset_right = 31.0
+offset_bottom = 89.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
@@ -743,21 +775,20 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -31.0
-offset_top = 17.0
+offset_top = 44.0
 offset_right = 31.0
-offset_bottom = 39.0
+offset_bottom = 66.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("9_na0o7")
 text = "Quit"
 
-[node name="Towers" type="Node2D" parent="."]
-
-[node name="PreviewTowers" type="Node2D" parent="."]
-
 [connection signal="input_event" from="Map/Empty_Area" to="Map" method="_on_empty_area_input_event"]
 [connection signal="pressed" from="PauseUI/Pause/PauseButton" to="PauseUI" method="pause"]
 [connection signal="pressed" from="PauseUI/Pause/PausePanel/ResumeButton" to="PauseUI" method="unpause"]
+[connection signal="pressed" from="PauseUI/Pause/PausePanel/SaveButton" to="PauseUI" method="_on_save_button_pressed"]
+[connection signal="pressed" from="PauseUI/Pause/PausePanel/LoadButton" to="StartUI" method="_on_load_button_pressed"]
 [connection signal="pressed" from="PauseUI/Pause/PausePanel/QuitButton" to="PauseUI" method="quit_game"]
 [connection signal="pressed" from="StartUI/Panel/StartButton" to="StartUI" method="start"]
+[connection signal="pressed" from="StartUI/Panel/LoadButton" to="StartUI" method="_on_load_button_pressed"]
 [connection signal="pressed" from="StartUI/Panel/QuitButton" to="StartUI" method="quit_game"]
