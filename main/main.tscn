@@ -670,10 +670,6 @@ towers_node = NodePath("../../../../Towers")
 preview_towers_node = NodePath("../../../../PreviewTowers")
 selection_map = NodePath("../../../../Map/SelectionOverLayer")
 
-[node name="Towers" type="Node2D" parent="."]
-
-[node name="PreviewTowers" type="Node2D" parent="."]
-
 [node name="StartUI" type="CanvasLayer" parent="."]
 script = ExtResource("15_n3o0a")
 
@@ -734,6 +730,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("9_na0o7")
 text = "Quit"
+
+[node name="Towers" type="Node2D" parent="."]
+
+[node name="PreviewTowers" type="Node2D" parent="."]
 
 [connection signal="input_event" from="Map/Empty_Area" to="Map" method="_on_empty_area_input_event"]
 [connection signal="pressed" from="PauseUI/Pause/PauseButton" to="PauseUI" method="pause"]

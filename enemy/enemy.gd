@@ -1,3 +1,4 @@
+class_name Enemies
 extends CharacterBody2D
 
 ## 怪物类型数据数组
@@ -33,6 +34,10 @@ var can_shoot: bool=true
 
 const bullet_stats = preload("res://bullet/enemy_bullet/default.tres")
 
+# 动画
+@export var state_machine_node:Node
+@export var animPlayer:AnimatedSprite2D
+@export var chaseArea:Area2D
 
 func _ready():
 	# 从配置的类型中随机选择一个
@@ -180,7 +185,8 @@ func _physics_process(delta: float):
 		
 		var direction: Vector2 = (target_world_position - global_position).normalized()
 		velocity = direction * speed
-		move_and_slide() 
+		move_and_slide()
+		flip()
 
 		# 检查是否到达路径点
 		if global_position.distance_to(target_world_position) < 4.0:
@@ -229,6 +235,14 @@ func take_damage(damage:int)->void:
 
 	if health<=0:
 		queue_free()
+
+# 面朝向
+func flip()->void:
+	var isNotMovingHorizontally:bool=velocity.x==0
+	if isNotMovingHorizontally:
+		return
+	var isMovingLeft:bool=velocity.x<0
+	animPlayer.flip_h=isMovingLeft
 
 
 func _on_attack_range_body_exited(body):
