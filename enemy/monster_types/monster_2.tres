@@ -1,12 +1,89 @@
-[gd_resource type="Resource" script_class="MonsterStats" load_steps=3 format=3 uid="uid://coyv48yq86q0"]
+[gd_resource type="Resource" script_class="MonsterStats" load_steps=12 format=3 uid="uid://coyv48yq86q0"]
 
+[ext_resource type="Texture2D" uid="uid://tivt337rrnby" path="res://tiles/assets/enemy/Character_040_Battler.png" id="1_e6wwl"]
 [ext_resource type="Script" uid="uid://brtcbnpn57rj7" path="res://enemy/monster_types/MonsterStats.gd" id="1_oubnc"]
-[ext_resource type="Texture2D" uid="uid://eax2npgyv5lu" path="res://tiles/assets/monsters/monster_2.png" id="2_e6wwl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhxup"]
+atlas = ExtResource("1_e6wwl")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ers8n"]
+atlas = ExtResource("1_e6wwl")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obxg2"]
+atlas = ExtResource("1_e6wwl")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8tfo"]
+atlas = ExtResource("1_e6wwl")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sy1mc"]
+atlas = ExtResource("1_e6wwl")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v20n2"]
+atlas = ExtResource("1_e6wwl")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbt1w"]
+atlas = ExtResource("1_e6wwl")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tlib"]
+atlas = ExtResource("1_e6wwl")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_okw18"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhxup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ers8n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obxg2")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8tfo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sy1mc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v20n2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bbt1w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tlib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bbt1w")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [resource]
 script = ExtResource("1_oubnc")
 monster_name = "Monster_2"
-texture = ExtResource("2_e6wwl")
+animations = SubResource("SpriteFrames_okw18")
 health = 20
 power = 10
 speed = 30

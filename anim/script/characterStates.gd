@@ -4,28 +4,34 @@ class_name characterStates
 @onready var enemy_node: Enemies = get_owner() as Enemies
 var canTransition: Callable = func(): return true	# canTransition: 可调用的过渡条件函数，默认返回true
 
+
 func _ready():
 	set_physics_process(false)
 	set_process_input(false)
 
-# 处理状态切换通知(5001=进入状态，5002=退出状态)
-func _notification(what:int)->void:
-	if what==5001:
-		enterState()
-		set_physics_process(true)
-		set_process_input(true)
-	elif what==5002:
-		set_physics_process(false)
-		set_process_input(false)
-		exitState();
+func enter_state() -> void:
+	# a. 负责通用的激活逻辑
+	set_physics_process(true)
+	set_process_input(true)
+	# b. 调用可被子类覆盖的具体进入逻辑
+	_on_enter()
 
-# 状态进入时的逻辑（空实现）
-func enterState()->void:
-	pass
-# 状态退出时的逻辑（空实现）
-func exitState()->void:
+# 2. 新增：公开的“退出状态”方法，由状态机调用
+func exit_state() -> void:
+	# a. 负责通用的关闭逻辑
+	set_physics_process(false)
+	set_process_input(false)
+	# b. 调用可被子类覆盖的具体退出逻辑
+	_on_exit()
+	
+
+func _on_enter() -> void:
 	pass
 
+func _on_exit() -> void:
+	pass
+	
+	
 # 当碰撞到"active_towers"组对象时切换到攻击状态
 func _on_body_entered(body)->void:
 	if body.is_in_group("active_towers"):

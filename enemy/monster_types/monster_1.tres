@@ -1,12 +1,156 @@
-[gd_resource type="Resource" script_class="MonsterStats" load_steps=3 format=3 uid="uid://d11bhd0mvoovp"]
+[gd_resource type="Resource" script_class="MonsterStats" load_steps=22 format=3 uid="uid://d11bhd0mvoovp"]
 
+[ext_resource type="Texture2D" uid="uid://oel3hwysocvx" path="res://tiles/assets/enemy/Enemy_002.png" id="1_hhigt"]
 [ext_resource type="Script" uid="uid://brtcbnpn57rj7" path="res://enemy/monster_types/MonsterStats.gd" id="1_whmre"]
-[ext_resource type="Texture2D" uid="uid://0h84b7e8sohc" path="res://tiles/assets/monsters/monster_1.png" id="2_hhigt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajlf1"]
+atlas = ExtResource("1_hhigt")
+region = Rect2(0, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tpll"]
+atlas = ExtResource("1_hhigt")
+region = Rect2(48, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boiuy"]
+atlas = ExtResource("1_hhigt")
+region = Rect2(96, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xa6ra"]
+atlas = ExtResource("1_hhigt")
+region = Rect2(144, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mf5o5"]
+atlas = ExtResource("1_hhigt")
+region = Rect2(192, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lygj0"]
+atlas = ExtResource("1_hhigt")
+region = Rect2(240, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cd6yf"]
+atlas = ExtResource("1_hhigt")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yskif"]
+atlas = ExtResource("1_hhigt")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kh7gq"]
+atlas = ExtResource("1_hhigt")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbsbg"]
+atlas = ExtResource("1_hhigt")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f76xv"]
+atlas = ExtResource("1_hhigt")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvh3a"]
+atlas = ExtResource("1_hhigt")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhigt"]
+atlas = ExtResource("1_hhigt")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nmvq"]
+atlas = ExtResource("1_hhigt")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_va33n"]
+atlas = ExtResource("1_hhigt")
+region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v42wm"]
+atlas = ExtResource("1_hhigt")
+region = Rect2(48, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lncsr"]
+atlas = ExtResource("1_hhigt")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dy5x8"]
+atlas = ExtResource("1_hhigt")
+region = Rect2(96, 144, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yjek7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ajlf1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tpll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boiuy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xa6ra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mf5o5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lygj0")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cd6yf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yskif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kh7gq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbsbg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f76xv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvh3a")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhigt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0nmvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_va33n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v42wm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lncsr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dy5x8")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [resource]
 script = ExtResource("1_whmre")
 monster_name = "Monster_1"
-texture = ExtResource("2_hhigt")
+animations = SubResource("SpriteFrames_yjek7")
 health = 50
 power = 5
 speed = 20

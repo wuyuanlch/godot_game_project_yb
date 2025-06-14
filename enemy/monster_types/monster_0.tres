@@ -1,12 +1,144 @@
-[gd_resource type="Resource" script_class="MonsterStats" load_steps=3 format=3 uid="uid://c0a7qx7sf6ymi"]
+[gd_resource type="Resource" script_class="MonsterStats" load_steps=19 format=3 uid="uid://c0a7qx7sf6ymi"]
 
+[ext_resource type="Texture2D" uid="uid://dhw8ocysxbuar" path="res://tiles/assets/enemy/Enemy_30_Battler.png" id="1_3s8g0"]
 [ext_resource type="Script" uid="uid://brtcbnpn57rj7" path="res://enemy/monster_types/MonsterStats.gd" id="1_aketk"]
-[ext_resource type="Texture2D" uid="uid://dt4okgedpck3x" path="res://tiles/assets/monsters/monster_0.png" id="2_3s8g0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1n1hp"]
+atlas = ExtResource("1_3s8g0")
+region = Rect2(128, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcknw"]
+atlas = ExtResource("1_3s8g0")
+region = Rect2(96, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a33qk"]
+atlas = ExtResource("1_3s8g0")
+region = Rect2(64, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04gn5"]
+atlas = ExtResource("1_3s8g0")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4ej0"]
+atlas = ExtResource("1_3s8g0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wl507"]
+atlas = ExtResource("1_3s8g0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21wi2"]
+atlas = ExtResource("1_3s8g0")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyf3s"]
+atlas = ExtResource("1_3s8g0")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wy67b"]
+atlas = ExtResource("1_3s8g0")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhohc"]
+atlas = ExtResource("1_3s8g0")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vw85"]
+atlas = ExtResource("1_3s8g0")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78ey8"]
+atlas = ExtResource("1_3s8g0")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pilbt"]
+atlas = ExtResource("1_3s8g0")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8m48"]
+atlas = ExtResource("1_3s8g0")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nwsh"]
+atlas = ExtResource("1_3s8g0")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l88vv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1n1hp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcknw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a33qk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a33qk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcknw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1n1hp")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04gn5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4ej0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wl507")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21wi2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyf3s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wy67b")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhohc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vw85")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78ey8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pilbt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8m48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nwsh")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [resource]
 script = ExtResource("1_aketk")
 monster_name = "Monster_0"
-texture = ExtResource("2_3s8g0")
+animations = SubResource("SpriteFrames_l88vv")
 health = 20
 power = 8
 speed = 40

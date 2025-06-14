@@ -14,8 +14,8 @@ var max_health: int
 
 # 使用相对路径获取grid (Spawner子节点需要向上两级)
 @onready var grid: Node2D = $"../../Map"
-@onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var health_bar: ProgressBar = $HealthBar		
+@onready var animated_sprite_2d = $AnimatedSprite2D
 
 var target_path : Array[Vector2i] = []
 var current_grid_pos: Vector2i  # 添加敌人当前网格位置
@@ -149,8 +149,8 @@ func apply_monster_stats(stats: MonsterStats):
 	if stats.speed > 0: 
 		self.speed = stats.speed
 	
-	if stats.texture:
-		sprite_2d.texture = stats.texture
+	if stats.animations:
+		animated_sprite_2d.sprite_frames = stats.animations
 	
 	update_health_bar()
 
@@ -205,14 +205,17 @@ func _physics_process(delta: float):
 func _process(delta):
 	if is_instance_valid(curr):
 		if can_shoot:
-			shoot(bullet_stats)
+			shoot(bullet_stats, false)
 			can_shoot=false
 			$shootingCoolDown.start()
 
 #射击
-func shoot(stats: BulletStats)->void:
+func shoot(stats: BulletStats, is_visable_bullet: bool)->void:
 	var temp_bullet:CharacterBody2D=bullet.instantiate()
 	
+	if not is_visable_bullet:
+		temp_bullet.visible = false
+		
 	temp_bullet.target = curr
 	temp_bullet.is_enemy_bullet = true
 	
@@ -227,8 +230,8 @@ func shoot(stats: BulletStats)->void:
 			
 	get_node("BulletContainer").add_child(temp_bullet)
 	temp_bullet.global_position = $Aim.global_position
-
-
+		
+		
 func take_damage(damage:int)->void:
 	health -= damage
 	health = max(health, 0)
