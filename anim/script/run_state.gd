@@ -1,12 +1,11 @@
 extends characterStates
 class_name run_state
 
-func _on_enter()->void:
+func enterState()->void:
 	enemy_node.animPlayer.play("walk")
 	if not enemy_node.chaseArea.body_entered.is_connected(_on_body_entered):
 		enemy_node.chaseArea.body_entered.connect(_on_body_entered)
-		
-func _on_exit()->void:
+func exitState()->void:
 	enemy_node.chaseArea.body_entered.disconnect(_on_body_entered)
 
 func _physics_process(delta):

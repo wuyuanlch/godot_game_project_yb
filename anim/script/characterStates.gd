@@ -8,23 +8,23 @@ func _ready():
 	set_physics_process(false)
 	set_process_input(false)
 
-	
-func enter_state() -> void:
-	set_physics_process(true)
-	set_process_input(true)
-	_on_enter()
+# 处理状态切换通知(5001=进入状态，5002=退出状态)
+func _notification(what:int)->void:
+	if what==5001:
+		enterState()
+		set_physics_process(true)
+		set_process_input(true)
+	elif what==5002:
+		set_physics_process(false)
+		set_process_input(false)
+		exitState();
 
-func exit_state() -> void:
-	set_physics_process(false)
-	set_process_input(false)
-	_on_exit()
-	
-func _on_enter() -> void:
+# 状态进入时的逻辑（空实现）
+func enterState()->void:
 	pass
-
-func _on_exit() -> void:
+# 状态退出时的逻辑（空实现）
+func exitState()->void:
 	pass
-
 
 # 当碰撞到"active_towers"组对象时切换到攻击状态
 func _on_body_entered(body)->void:
