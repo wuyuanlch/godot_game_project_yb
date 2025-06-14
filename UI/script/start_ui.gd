@@ -10,7 +10,7 @@ func quit_game():
 
 
 func _on_load_button_pressed():
-	var save_file_path = "user://save/load/scene_data.tres"
+	var save_file_path = "user://scene_data.tres"
 	
 	# 无存档
 	if not FileAccess.file_exists(save_file_path):
