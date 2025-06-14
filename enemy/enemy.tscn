@@ -193,13 +193,6 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_5ffra")
 animation = &"attack"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-texture_filter = 1
-position = Vector2(0, -6)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("4_xoplw")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_ofsxj")
@@ -246,6 +239,15 @@ script = ExtResource("10_78jik")
 
 [node name="RunState" type="Node" parent="StateMachine"]
 script = ExtResource("11_o3pv7")
+
+[node name="Unused_Node" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Unused_Node"]
+texture_filter = 1
+position = Vector2(0, -6)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_xoplw")
 
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
 [connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]
