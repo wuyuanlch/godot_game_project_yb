@@ -3,7 +3,7 @@ extends CharacterBody2D
 ## 怪物类型数据数组
 #在 enemy.tscn 场景配置这个数组，填入多个 MonsterStats 资源
 @export var available_monster_types: Array[MonsterStats]
-var floating_text_scene: PackedScene=preload("res://enemy/floating_text.tscn")
+@onready var floating_text_scene: PackedScene=preload("res://enemy/floating_text.tscn")
 
 ## 运行时确定的怪物属性 (不再 @export)
 var current_monster_stats: MonsterStats 

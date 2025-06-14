@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://cebqi2rhbl1kj" path="res://tiles/assets/front/Silver.ttf" id="2_tg1mr"]
 
 [node name="FloatingText" type="Node2D"]
+z_index = 1
 script = ExtResource("1_stht5")
 
 [node name="Label" type="Label" parent="."]

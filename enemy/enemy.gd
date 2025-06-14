@@ -4,6 +4,7 @@ extends CharacterBody2D
 ## 怪物类型数据数组
 #在 enemy.tscn 场景配置这个数组，填入多个 MonsterStats 资源
 @export var available_monster_types: Array[MonsterStats]
+@onready var floating_text: PackedScene = preload("res://enemy/floating_text.tscn")
 
 ## 运行时确定的怪物属性 (不再 @export)
 var current_monster_stats: MonsterStats 
@@ -48,7 +49,6 @@ func _ready():
 		max_health = 1 
 		health = max_health
 		update_health_bar() 
-
 	
 	# 初始化并启动用于重新检查防御塔的计时器
 	recheck_towers_timer = Timer.new()
@@ -233,6 +233,10 @@ func take_damage(damage:int)->void:
 	health = max(health, 0)
 	update_health_bar()
 
+	var damage_text_instance = floating_text.instantiate()
+	add_child(damage_text_instance)
+	damage_text_instance.display_damage_text(damage)
+	
 	if health<=0:
 		queue_free()
 
