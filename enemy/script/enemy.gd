@@ -24,6 +24,7 @@ var target_tower: Node2D = null # 当前目标防御塔
 var recheck_towers_timer: Timer # 用于周期性重新检查塔的计时器
 var is_placed: bool = false # 新增：标记塔是否已正式放置，默认为 false
 var towers_in_range: Array[Node2D] = [] # 范围内的防御塔数组
+var  floating_text = preload("res://enemy/floating_text.tscn")
 
 const RECHECK_INTERVAL: float = 0.5 # 每隔1秒重新检查一次塔
 
@@ -232,6 +233,10 @@ func take_damage(damage:int)->void:
 	health -= damage
 	health = max(health, 0)
 	update_health_bar()
+
+	var damage_text_instance = floating_text.instantiate()
+	add_child(damage_text_instance)
+	damage_text_instance.display_damage_text(damage)
 
 	if health<=0:
 		queue_free()
