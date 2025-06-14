@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://db7t02pms4t1t"]
+[gd_scene load_steps=34 format=3 uid="uid://db7t02pms4t1t"]
 
 [ext_resource type="Script" uid="uid://ckn6bou6o8obb" path="res://enemy/enemy.gd" id="1_ofsxj"]
 [ext_resource type="Script" uid="uid://brtcbnpn57rj7" path="res://enemy/monster_types/MonsterStats.gd" id="2_1wwld"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://bgbvkh2f0fswn" path="res://anim/state_machine.tscn" id="7_y5vj3"]
 [ext_resource type="Script" uid="uid://cs8n3nkwggtiu" path="res://anim/idle_state.gd" id="8_5ffra"]
 [ext_resource type="Script" uid="uid://do28g8j4qff42" path="res://enemy/attack_state.gd" id="10_78jik"]
-[ext_resource type="Script" uid="uid://b8cjdbe8rpnhk" path="res://anim/run_state.gd" id="11_o3pv7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_78jik"]
 atlas = ExtResource("6_e355f")
@@ -191,7 +190,7 @@ chaseArea = NodePath("AttackRange")
 position = Vector2(0, -12)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_5ffra")
-animation = &"walk"
+animation = &"attack"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
@@ -234,18 +233,15 @@ shape = SubResource("CircleShape2D_1wwld")
 
 [node name="shootingCoolDown" type="Timer" parent="."]
 
-[node name="StateMachine" parent="." node_paths=PackedStringArray("currentState", "states") instance=ExtResource("7_y5vj3")]
-currentState = NodePath("IdleState")
-states = [NodePath("AttackState"), NodePath("IdleState"), NodePath("RunState")]
+[node name="StateMachine" parent="." node_paths=PackedStringArray("currentState") instance=ExtResource("7_y5vj3")]
+currentState = NodePath("AttackState")
 
-[node name="IdleState" type="Node" parent="StateMachine"]
+[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animPlayer")]
 script = ExtResource("8_5ffra")
+animPlayer = NodePath("../../AnimatedSprite2D")
 
 [node name="AttackState" type="Node" parent="StateMachine"]
 script = ExtResource("10_78jik")
-
-[node name="RunState" type="Node" parent="StateMachine"]
-script = ExtResource("11_o3pv7")
 
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
 [connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]
