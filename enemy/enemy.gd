@@ -15,7 +15,8 @@ var max_health: int
 
 # 使用相对路径获取grid (Spawner子节点需要向上两级)
 @onready var grid: Node2D = $"../../Map"
-@onready var sprite_2d: Sprite2D = $Sprite2D
+#@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var health_bar: ProgressBar = $HealthBar		
 
 var target_path : Array[Vector2i] = []
@@ -39,6 +40,7 @@ const bullet_stats = preload("res://bullet/enemy_bullet/default.tres")
 @export var state_machine_node:Node
 @export var animPlayer:AnimatedSprite2D
 @export var chaseArea:Area2D
+
 
 func _ready():
 	# 从配置的类型中随机选择一个
@@ -148,8 +150,8 @@ func apply_monster_stats(stats: MonsterStats):
 	if stats.speed > 0: 
 		self.speed = stats.speed
 	
-	if stats.texture:
-		sprite_2d.texture = stats.texture
+	if stats.animations:
+		animated_sprite_2d.sprite_frames = stats.animations
 	
 	update_health_bar()
 
@@ -202,15 +204,18 @@ func _physics_process(delta: float):
 
 
 func _process(delta):
-	if is_instance_valid(curr):
-		if can_shoot:
-			shoot(bullet_stats)
-			can_shoot=false
-			$shootingCoolDown.start()
+	if is_instance_valid(curr) and can_shoot:
+		shoot(bullet_stats, true)
+		can_shoot=false
+		$shootingCoolDown.start()
 
 #射击
-func shoot(stats: BulletStats)->void:
+func shoot(stats: BulletStats, is_vis_bullet: bool)->void:
 	var temp_bullet:CharacterBody2D=bullet.instantiate()
+
+	# 是否显示子弹
+	if temp_bullet.has_node("Sprite2D") and is_vis_bullet:
+		temp_bullet.get_node("Sprite2D").visible = false
 	
 	temp_bullet.target = curr
 	temp_bullet.is_enemy_bullet = true
@@ -227,6 +232,7 @@ func shoot(stats: BulletStats)->void:
 	get_node("BulletContainer").add_child(temp_bullet)
 	temp_bullet.global_position = $Aim.global_position
 
+		
 
 func take_damage(damage:int)->void:
 	health -= damage

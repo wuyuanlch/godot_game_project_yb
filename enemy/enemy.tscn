@@ -1,16 +1,15 @@
-[gd_scene load_steps=35 format=3 uid="uid://db7t02pms4t1t"]
+[gd_scene load_steps=34 format=3 uid="uid://db7t02pms4t1t"]
 
 [ext_resource type="Script" uid="uid://ckn6bou6o8obb" path="res://enemy/enemy.gd" id="1_ofsxj"]
 [ext_resource type="Script" uid="uid://brtcbnpn57rj7" path="res://enemy/monster_types/MonsterStats.gd" id="2_1wwld"]
 [ext_resource type="Resource" uid="uid://c0a7qx7sf6ymi" path="res://enemy/monster_types/monster_0.tres" id="3_y5vj3"]
 [ext_resource type="Resource" uid="uid://d11bhd0mvoovp" path="res://enemy/monster_types/monster_1.tres" id="4_5ffra"]
 [ext_resource type="Texture2D" uid="uid://eax2npgyv5lu" path="res://tiles/assets/monsters/monster_2.png" id="4_xoplw"]
-[ext_resource type="Resource" uid="uid://coyv48yq86q0" path="res://enemy/monster_types/monster_2.tres" id="5_e355f"]
 [ext_resource type="Texture2D" uid="uid://oel3hwysocvx" path="res://tiles/assets/enemy/Enemy_002.png" id="6_e355f"]
-[ext_resource type="PackedScene" uid="uid://bgbvkh2f0fswn" path="res://anim/state_machine.tscn" id="7_y5vj3"]
-[ext_resource type="Script" uid="uid://cs8n3nkwggtiu" path="res://anim/idle_state.gd" id="8_5ffra"]
-[ext_resource type="Script" uid="uid://do28g8j4qff42" path="res://enemy/attack_state.gd" id="10_78jik"]
-[ext_resource type="Script" uid="uid://b8cjdbe8rpnhk" path="res://anim/run_state.gd" id="11_o3pv7"]
+[ext_resource type="PackedScene" uid="uid://bgbvkh2f0fswn" path="res://enemy/anim/state_machine.tscn" id="7_y5vj3"]
+[ext_resource type="Script" uid="uid://cs8n3nkwggtiu" path="res://enemy/anim/idle_state.gd" id="8_5ffra"]
+[ext_resource type="Script" uid="uid://do28g8j4qff42" path="res://enemy/anim/attack_state.gd" id="10_78jik"]
+[ext_resource type="Script" uid="uid://b8cjdbe8rpnhk" path="res://enemy/anim/run_state.gd" id="11_o3pv7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_78jik"]
 atlas = ExtResource("6_e355f")
@@ -176,13 +175,13 @@ border_width_bottom = 1
 border_color = Color(0.8, 0.8, 0.8, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1wwld"]
-radius = 16.0312
+radius = 9.05539
 
 [node name="enemy" type="CharacterBody2D" node_paths=PackedStringArray("state_machine_node", "animPlayer", "chaseArea") groups=["Enemy"]]
 texture_filter = 1
 collision_layer = 2
 script = ExtResource("1_ofsxj")
-available_monster_types = Array[ExtResource("2_1wwld")]([ExtResource("3_y5vj3"), ExtResource("4_5ffra"), ExtResource("5_e355f")])
+available_monster_types = Array[ExtResource("2_1wwld")]([ExtResource("3_y5vj3"), ExtResource("4_5ffra")])
 state_machine_node = NodePath("StateMachine")
 animPlayer = NodePath("AnimatedSprite2D")
 chaseArea = NodePath("AttackRange")
@@ -191,7 +190,7 @@ chaseArea = NodePath("AttackRange")
 position = Vector2(0, -12)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_5ffra")
-animation = &"walk"
+animation = &"attack"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
