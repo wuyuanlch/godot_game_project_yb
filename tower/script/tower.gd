@@ -2,7 +2,9 @@ class_name Towers
 extends StaticBody2D
 
 # 单个防御塔的代码，可朝向敌人，攻击离中心点最近的敌人
+signal tower_destroyed(tile_pos, size)
 var bullet:PackedScene = preload("res://bullet/tower_bullet.tscn")
+var initial_tile_pos: Vector2i
 var current_targets:Array=[]
 var curr :CharacterBody2D
 var can_shoot:bool=true
@@ -18,9 +20,10 @@ var light_radius_squared: float = 0.0
 @onready var point_light: PointLight2D = $PointLight2D
 @onready var sprite: Sprite2D = $Sprite2D
 
-
 var health: int = 100
 var max_health: int = 100
+
+@export var size: Vector2i = Vector2i(1,1)
 
 # 加载哪种元素的子弹
 const bullet_stats = preload("res://bullet/tower_bullet/default.tres")
@@ -148,6 +151,7 @@ func tower_take_damage(damage:int)->void:
 	update_health_bar()
 	
 	if health<=0:
+		emit_signal("tower_destroyed", initial_tile_pos, size)
 		queue_free()
 
 
@@ -210,6 +214,14 @@ func _on_upgrade_button_pressed() -> void:
 	# get_tree().create_timer(0.1).timeout.connect(update_light_radius) # 延迟一点点调用，确保升级属性已生效
 	# update_light_radius() 
 
+func update_collision_shape(size: Vector2i):
+	var collision_shape = $CollisionShape2D
+	if collision_shape:
+		var tile_size = get_parent().tile_set.tile_size
+		collision_shape.shape.extents = Vector2(
+            tile_size.x * size.x / 2.0, 
+            tile_size.y * size.y / 2.0
+        )
 
 func select():
 	show_tower_actions_ui(true)
