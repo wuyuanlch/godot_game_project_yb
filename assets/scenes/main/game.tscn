@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://h85ojt6v2k58"]
+
+[ext_resource type="Script" uid="uid://hcb3b54hu568" path="res://assets/scripts/main/main.gd" id="1_r7tk0"]
+[ext_resource type="PackedScene" uid="uid://kmcii4q4f35g" path="res://assets/scenes/map/map_layer.tscn" id="2_6pepq"]
+[ext_resource type="PackedScene" uid="uid://lvxsicmgvlvu" path="res://assets/scenes/enemy/small_monsters/monster_0.tscn" id="6_g4a1o"]
+[ext_resource type="PackedScene" uid="uid://cnpc1hstjbkfp" path="res://assets/scenes/tower/base_tower.tscn" id="6_r7tk0"]
+[ext_resource type="PackedScene" uid="uid://bner5pdayvns6" path="res://assets/scenes/camera/main_camera.tscn" id="6_w5ylo"]
+[ext_resource type="PackedScene" uid="uid://05pdq3nioeiq" path="res://assets/scenes/enemy/small_monsters/monster_1.tscn" id="7_88dt2"]
+[ext_resource type="PackedScene" uid="uid://2wlx763flgq2" path="res://assets/scenes/enemy/small_monsters/monster_2.tscn" id="8_6qb4j"]
+[ext_resource type="Script" uid="uid://dyorv7bxgiadh" path="res://assets/scripts/enemy/all_enemy.gd" id="8_n3o0a"]
+[ext_resource type="PackedScene" uid="uid://b34teb260bjyh" path="res://UI/UITower.tscn" id="8_umact"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_r7tk0")
+
+[node name="MapLayer" parent="." instance=ExtResource("2_6pepq")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="UI"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 32.0
+offset_bottom = 32.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UI"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_top = 77.0
+offset_right = 32.0
+offset_bottom = 109.0
+
+[node name="UITower" parent="UI/UI/VBoxContainer" node_paths=PackedStringArray("map_layer", "towers_node", "preview_towers_node") instance=ExtResource("8_umact")]
+layout_mode = 2
+map_layer = NodePath("../../../../MapLayer")
+towers_node = NodePath("../../../../Towers")
+preview_towers_node = NodePath("../../../../PreviewTowers")
+
+[node name="Camera" parent="." instance=ExtResource("6_w5ylo")]
+
+[node name="AllEnemy" type="Node2D" parent="." node_paths=PackedStringArray("map_layer")]
+script = ExtResource("8_n3o0a")
+small_enemies = Array[PackedScene]([ExtResource("6_g4a1o"), ExtResource("7_88dt2"), ExtResource("8_6qb4j")])
+map_layer = NodePath("../MapLayer")
+
+[node name="PreviewTowers" type="Node2D" parent="."]
+
+[node name="Towers" type="Node2D" parent="."]
+
+[node name="BaseTower" parent="Towers" instance=ExtResource("6_r7tk0")]
+position = Vector2(309, 96)

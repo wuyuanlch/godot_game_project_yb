@@ -1,9 +1,9 @@
 [gd_resource type="Theme" load_steps=11 format=3 uid="uid://bx64jjwsvwpv1"]
 
-[ext_resource type="Texture2D" uid="uid://bwh7nncbvu0nj" path="res://tiles/assets/buttons/button_hover.png" id="1_nuhm7"]
-[ext_resource type="Texture2D" uid="uid://bitj7qtr7x2d0" path="res://tiles/assets/buttons/button_normal.png" id="2_25rbk"]
-[ext_resource type="Texture2D" uid="uid://bnoqw2ojmfuuc" path="res://tiles/assets/buttons/button_pressed.png" id="3_7hie6"]
-[ext_resource type="FontFile" uid="uid://bydfh0blmt8lh" path="res://tiles/assets/front/ark-pixel-12px-monospaced-zh_cn.ttf" id="4_wo7bw"]
+[ext_resource type="Texture2D" uid="uid://bwh7nncbvu0nj" path="res://assets/graphics/sprites/temporary_diagram/buttons/button_hover.png" id="1_nuhm7"]
+[ext_resource type="Texture2D" uid="uid://bitj7qtr7x2d0" path="res://assets/graphics/sprites/temporary_diagram/buttons/button_normal.png" id="2_25rbk"]
+[ext_resource type="Texture2D" uid="uid://bnoqw2ojmfuuc" path="res://assets/graphics/sprites/temporary_diagram/buttons/button_pressed.png" id="3_7hie6"]
+[ext_resource type="FontFile" uid="uid://bydfh0blmt8lh" path="res://assets/graphics/sprites/temporary_diagram/front/ark-pixel-12px-monospaced-zh_cn.ttf" id="4_wo7bw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nuhm7"]
 

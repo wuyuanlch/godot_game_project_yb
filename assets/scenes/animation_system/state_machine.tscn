@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://cey3gguvi2vok"]
+
+[ext_resource type="Script" uid="uid://dp2637jeadp6e" path="res://assets/scripts/animation_system/enemy_animation/state_machine.gd" id="1_nsi3c"]
+[ext_resource type="Script" uid="uid://cs8n3nkwggtiu" path="res://assets/scripts/animation_system/enemy_animation/idle_state.gd" id="2_cm80n"]
+[ext_resource type="Script" uid="uid://do28g8j4qff42" path="res://assets/scripts/animation_system/enemy_animation/attack_state.gd" id="3_mx6mu"]
+[ext_resource type="Script" uid="uid://b8cjdbe8rpnhk" path="res://assets/scripts/animation_system/enemy_animation/run_state.gd" id="4_husnc"]
+
+[node name="StateMachine" type="Node" node_paths=PackedStringArray("currentState", "states")]
+script = ExtResource("1_nsi3c")
+currentState = NodePath("IdleState")
+states = [NodePath("IdleState"), NodePath("AttackState"), NodePath("RunState")]
+
+[node name="IdleState" type="Node" parent="."]
+script = ExtResource("2_cm80n")
+
+[node name="AttackState" type="Node" parent="."]
+script = ExtResource("3_mx6mu")
+
+[node name="RunState" type="Node" parent="."]
+script = ExtResource("4_husnc")

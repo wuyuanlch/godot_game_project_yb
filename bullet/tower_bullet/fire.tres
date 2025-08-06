@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BulletStats" load_steps=3 format=3 uid="uid://1eoqj7drn3ul"]
 
-[ext_resource type="Script" uid="uid://ddgvx72i2ivi5" path="res://bullet/script/BulletStats.gd" id="1_buh3i"]
-[ext_resource type="Texture2D" uid="uid://dk83ltki2n16e" path="res://tiles/assets/bullets/fire/1_001.png" id="2_d0lnb"]
+[ext_resource type="Script" uid="uid://ddgvx72i2ivi5" path="res://assets/scripts/bullet/BulletStats.gd" id="1_buh3i"]
+[ext_resource type="Texture2D" uid="uid://dk83ltki2n16e" path="res://assets/graphics/sprites/temporary_diagram/bullets/fire/1_001.png" id="2_d0lnb"]
 
 [resource]
 script = ExtResource("1_buh3i")

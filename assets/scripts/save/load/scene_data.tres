@@ -1,0 +1,495 @@
+[gd_resource type="Resource" script_class="SceneData" load_steps=78 format=3]
+
+[ext_resource type="Script" uid="uid://nlu0hmtwxq5q" path="res://assets/scripts/save/scence_data.gd" id="1_btafe"]
+[ext_resource type="Script" uid="uid://ckn6bou6o8obb" path="res://assets/scripts/enemy/base_enemy.gd" id="1_nq20o"]
+[ext_resource type="Script" uid="uid://brtcbnpn57rj7" path="res://monster_types/MonsterStats.gd" id="2_jny3o"]
+[ext_resource type="Resource" uid="uid://c0a7qx7sf6ymi" path="res://monster_types/monster_0.tres" id="3_gfave"]
+[ext_resource type="Resource" uid="uid://d11bhd0mvoovp" path="res://monster_types/monster_1.tres" id="4_wbsyf"]
+[ext_resource type="Resource" uid="uid://coyv48yq86q0" path="res://monster_types/monster_2.tres" id="5_0np3l"]
+[ext_resource type="Texture2D" uid="uid://dhw8ocysxbuar" path="res://assets/graphics/sprites/temporary_diagram/enemy/Enemy_30_Battler.png" id="6_q8hrk"]
+[ext_resource type="Texture2D" uid="uid://eax2npgyv5lu" path="res://assets/graphics/sprites/temporary_diagram/monsters/monster_2.png" id="7_3cosr"]
+[ext_resource type="PackedScene" uid="uid://cey3gguvi2vok" path="res://assets/scenes/animation_system/state_machine.tscn" id="8_l6j05"]
+[ext_resource type="Script" uid="uid://dp2637jeadp6e" path="res://assets/scripts/animation_system/enemy_animation/state_machine.gd" id="9_1kbrn"]
+[ext_resource type="Script" uid="uid://cs8n3nkwggtiu" path="res://assets/scripts/animation_system/enemy_animation/idle_state.gd" id="10_gh0ia"]
+[ext_resource type="Script" uid="uid://do28g8j4qff42" path="res://assets/scripts/animation_system/enemy_animation/attack_state.gd" id="11_a5q87"]
+[ext_resource type="Script" uid="uid://b8cjdbe8rpnhk" path="res://assets/scripts/animation_system/enemy_animation/run_state.gd" id="12_7vth1"]
+[ext_resource type="Texture2D" uid="uid://oel3hwysocvx" path="res://assets/graphics/sprites/temporary_diagram/enemy/Enemy_002.png" id="13_hwmex"]
+[ext_resource type="Script" uid="uid://dqtk2ub0833g2" path="res://assets/scripts/tower/base_tower.gd" id="15_igbm8"]
+[ext_resource type="Texture2D" uid="uid://4on4qdnkmi1u" path="res://assets/graphics/sprites/temporary_diagram/towers/castle.png" id="16_aeo7v"]
+[ext_resource type="Script" uid="uid://c26xijpc7i31q" path="res://assets/scripts/tower/range_visualizer.gd" id="17_ubflw"]
+[ext_resource type="Texture2D" uid="uid://b5hdqjubf5qta" path="res://assets/graphics/sprites/temporary_diagram/buttons/delete.png" id="18_5mwl8"]
+[ext_resource type="Texture2D" uid="uid://b3s3ccdpylnqd" path="res://assets/graphics/sprites/temporary_diagram/buttons/update.png" id="19_f6w7i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1n1hp"]
+atlas = ExtResource("6_q8hrk")
+region = Rect2(128, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcknw"]
+atlas = ExtResource("6_q8hrk")
+region = Rect2(96, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a33qk"]
+atlas = ExtResource("6_q8hrk")
+region = Rect2(64, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04gn5"]
+atlas = ExtResource("6_q8hrk")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4ej0"]
+atlas = ExtResource("6_q8hrk")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wl507"]
+atlas = ExtResource("6_q8hrk")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21wi2"]
+atlas = ExtResource("6_q8hrk")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyf3s"]
+atlas = ExtResource("6_q8hrk")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wy67b"]
+atlas = ExtResource("6_q8hrk")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhohc"]
+atlas = ExtResource("6_q8hrk")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vw85"]
+atlas = ExtResource("6_q8hrk")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78ey8"]
+atlas = ExtResource("6_q8hrk")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pilbt"]
+atlas = ExtResource("6_q8hrk")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8m48"]
+atlas = ExtResource("6_q8hrk")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nwsh"]
+atlas = ExtResource("6_q8hrk")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l88vv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1n1hp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcknw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a33qk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a33qk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcknw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1n1hp")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04gn5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4ej0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wl507")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21wi2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyf3s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wy67b")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhohc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vw85")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78ey8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pilbt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8m48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nwsh")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ofsxj"]
+radius = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1wwld"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5vj3"]
+bg_color = Color(0.958, 0, 0.236304, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1wwld"]
+radius = 6.0
+
+[sub_resource type="PackedScene" id="PackedScene_nq20o"]
+_bundled = {
+"conn_count": 3,
+"conns": PackedInt32Array(5, 0, 54, 53, 2, 0, 0, 5, 0, 56, 55, 2, 0, 0, 9, 0, 58, 57, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("@CharacterBody2D@27", "texture_filter", "position", "collision_layer", "script", "available_monster_types", "state_machine_node", "animPlayer", "chaseArea", "Enemy", "CharacterBody2D", "AnimatedSprite2D", "scale", "sprite_frames", "animation", "flip_h", "Sprite2D", "visible", "texture", "CollisionShape2D", "shape", "HealthBar", "anchors_preset", "anchor_left", "anchor_top", "anchor_right", "anchor_bottom", "offset_left", "offset_top", "offset_right", "offset_bottom", "grow_horizontal", "grow_vertical", "theme_override_styles/background", "theme_override_styles/fill", "max_value", "value", "show_percentage", "ProgressBar", "AttackRange", "Area2D", "Aim", "Marker2D", "BulletContainer", "Node", "shootingCoolDown", "Timer", "StateMachine", "currentState", "states", "IdleState", "AttackState", "RunState", "_on_attack_range_body_entered", "body_entered", "_on_attack_range_body_exited", "body_exited", "_on_shooting_cool_down_timeout", "timeout"),
+"node_count": 14,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 10, 0, -1, 8, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 1073741830, 5, 1073741831, 6, 1073741832, 7, 1, 9, 0, 0, 11, 11, -1, 5, 2, 8, 12, 9, 13, 10, 14, 11, 15, 12, 0, 0, 0, 16, 16, -1, 5, 17, 13, 1, 0, 2, 14, 12, 15, 18, 16, 0, 0, 0, 19, 19, -1, 2, 2, 14, 20, 17, 0, 0, 0, 38, 21, -1, 18, 17, 13, 22, 18, 23, 19, 24, 19, 25, 19, 26, 19, 27, 20, 28, 21, 29, 22, 30, 23, 31, 2, 32, 2, 12, 24, 33, 25, 34, 26, 35, 27, 36, 27, 37, 13, 0, 0, 0, 40, 39, -1, 0, 0, 5, 0, 19, 19, -1, 2, 2, 14, 20, 28, 0, 0, 0, 42, 41, -1, 0, 0, 0, 0, 44, 43, -1, 0, 0, 0, 0, 46, 45, -1, 0, 0, 0, 0, 44, 47, 29, 3, 4, 30, 1073741872, 31, 1073741873, 32, 0, 10, 0, 44, 50, -1, 1, 4, 33, 0, 10, 0, 44, 51, -1, 1, 4, 34, 0, 10, 0, 44, 52, -1, 1, 4, 35, 0),
+"variants": [1, Vector2(222.849, 157.96), 2, ExtResource("1_nq20o"), Array[ExtResource("2_jny3o")]([ExtResource("3_gfave"), ExtResource("4_wbsyf"), ExtResource("5_0np3l")]), NodePath("StateMachine"), NodePath("AnimatedSprite2D"), NodePath("AttackRange"), Vector2(0, -12), Vector2(0.5, 0.5), SubResource("SpriteFrames_l88vv"), &"attack", true, false, Vector2(0, -6), Vector2(0.2, 0.2), ExtResource("7_3cosr"), SubResource("CircleShape2D_ofsxj"), 8, 0.5, -6.0, -16.0, 19.0, -12.0, Vector2(0.5, 0.2), SubResource("StyleBoxFlat_1wwld"), SubResource("StyleBoxFlat_y5vj3"), 20.0, SubResource("CircleShape2D_1wwld"), ExtResource("8_l6j05"), ExtResource("9_1kbrn"), NodePath("AttackState"), [NodePath("AttackState"), NodePath("IdleState"), NodePath("RunState")], ExtResource("10_gh0ia"), ExtResource("11_a5q87"), ExtResource("12_7vth1")],
+"version": 3
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajlf1"]
+atlas = ExtResource("13_hwmex")
+region = Rect2(0, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tpll"]
+atlas = ExtResource("13_hwmex")
+region = Rect2(48, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boiuy"]
+atlas = ExtResource("13_hwmex")
+region = Rect2(96, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xa6ra"]
+atlas = ExtResource("13_hwmex")
+region = Rect2(144, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mf5o5"]
+atlas = ExtResource("13_hwmex")
+region = Rect2(192, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lygj0"]
+atlas = ExtResource("13_hwmex")
+region = Rect2(240, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cd6yf"]
+atlas = ExtResource("13_hwmex")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yskif"]
+atlas = ExtResource("13_hwmex")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kh7gq"]
+atlas = ExtResource("13_hwmex")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbsbg"]
+atlas = ExtResource("13_hwmex")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f76xv"]
+atlas = ExtResource("13_hwmex")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvh3a"]
+atlas = ExtResource("13_hwmex")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhigt"]
+atlas = ExtResource("13_hwmex")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nmvq"]
+atlas = ExtResource("13_hwmex")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_va33n"]
+atlas = ExtResource("13_hwmex")
+region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v42wm"]
+atlas = ExtResource("13_hwmex")
+region = Rect2(48, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lncsr"]
+atlas = ExtResource("13_hwmex")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dy5x8"]
+atlas = ExtResource("13_hwmex")
+region = Rect2(96, 144, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yjek7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ajlf1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tpll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boiuy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xa6ra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mf5o5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lygj0")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cd6yf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yskif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kh7gq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbsbg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f76xv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvh3a")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhigt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0nmvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_va33n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v42wm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lncsr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dy5x8")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="PackedScene" id="PackedScene_jny3o"]
+_bundled = {
+"conn_count": 3,
+"conns": PackedInt32Array(5, 0, 54, 53, 2, 0, 0, 5, 0, 56, 55, 2, 0, 0, 9, 0, 58, 57, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("@CharacterBody2D@29", "texture_filter", "position", "collision_layer", "script", "available_monster_types", "state_machine_node", "animPlayer", "chaseArea", "Enemy", "CharacterBody2D", "AnimatedSprite2D", "scale", "sprite_frames", "animation", "flip_h", "Sprite2D", "visible", "texture", "CollisionShape2D", "shape", "HealthBar", "anchors_preset", "anchor_left", "anchor_top", "anchor_right", "anchor_bottom", "offset_left", "offset_top", "offset_right", "offset_bottom", "grow_horizontal", "grow_vertical", "theme_override_styles/background", "theme_override_styles/fill", "max_value", "value", "show_percentage", "ProgressBar", "AttackRange", "Area2D", "Aim", "Marker2D", "BulletContainer", "Node", "shootingCoolDown", "Timer", "StateMachine", "currentState", "states", "IdleState", "AttackState", "RunState", "_on_attack_range_body_entered", "body_entered", "_on_attack_range_body_exited", "body_exited", "_on_shooting_cool_down_timeout", "timeout"),
+"node_count": 14,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 10, 0, -1, 8, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 1073741830, 5, 1073741831, 6, 1073741832, 7, 1, 9, 0, 0, 11, 11, -1, 5, 2, 8, 12, 9, 13, 10, 14, 11, 15, 12, 0, 0, 0, 16, 16, -1, 5, 17, 13, 1, 0, 2, 14, 12, 15, 18, 16, 0, 0, 0, 19, 19, -1, 2, 2, 14, 20, 17, 0, 0, 0, 38, 21, -1, 17, 22, 18, 23, 19, 24, 19, 25, 19, 26, 19, 27, 20, 28, 21, 29, 22, 30, 23, 31, 2, 32, 2, 12, 24, 33, 25, 34, 26, 35, 27, 36, 28, 37, 13, 0, 0, 0, 40, 39, -1, 0, 0, 5, 0, 19, 19, -1, 2, 2, 14, 20, 29, 0, 0, 0, 42, 41, -1, 0, 0, 0, 0, 44, 43, -1, 0, 0, 0, 0, 46, 45, -1, 0, 0, 0, 0, 44, 47, 30, 3, 4, 31, 1073741872, 32, 1073741873, 33, 0, 10, 0, 44, 50, -1, 1, 4, 34, 0, 10, 0, 44, 51, -1, 1, 4, 35, 0, 10, 0, 44, 52, -1, 1, 4, 36, 0),
+"variants": [1, Vector2(225.452, 153.16), 2, ExtResource("1_nq20o"), Array[ExtResource("2_jny3o")]([ExtResource("3_gfave"), ExtResource("4_wbsyf"), ExtResource("5_0np3l")]), NodePath("StateMachine"), NodePath("AnimatedSprite2D"), NodePath("AttackRange"), Vector2(0, -12), Vector2(0.5, 0.5), SubResource("SpriteFrames_yjek7"), &"attack", true, false, Vector2(0, -6), Vector2(0.2, 0.2), ExtResource("7_3cosr"), SubResource("CircleShape2D_ofsxj"), 8, 0.5, -6.0, -16.0, 19.0, -12.0, Vector2(0.5, 0.2), SubResource("StyleBoxFlat_1wwld"), SubResource("StyleBoxFlat_y5vj3"), 50.0, 40.0, SubResource("CircleShape2D_1wwld"), ExtResource("8_l6j05"), ExtResource("9_1kbrn"), NodePath("AttackState"), [NodePath("AttackState"), NodePath("IdleState"), NodePath("RunState")], ExtResource("10_gh0ia"), ExtResource("11_a5q87"), ExtResource("12_7vth1")],
+"version": 3
+}
+
+[sub_resource type="PackedScene" id="PackedScene_gfave"]
+_bundled = {
+"conn_count": 3,
+"conns": PackedInt32Array(5, 0, 55, 54, 2, 0, 0, 5, 0, 57, 56, 2, 0, 0, 9, 0, 59, 58, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("@CharacterBody2D@31", "texture_filter", "position", "collision_layer", "velocity", "script", "available_monster_types", "state_machine_node", "animPlayer", "chaseArea", "Enemy", "CharacterBody2D", "AnimatedSprite2D", "scale", "sprite_frames", "animation", "frame_progress", "Sprite2D", "visible", "texture", "CollisionShape2D", "shape", "HealthBar", "anchors_preset", "anchor_left", "anchor_top", "anchor_right", "anchor_bottom", "offset_left", "offset_top", "offset_right", "offset_bottom", "grow_horizontal", "grow_vertical", "theme_override_styles/background", "theme_override_styles/fill", "max_value", "value", "show_percentage", "ProgressBar", "AttackRange", "Area2D", "Aim", "Marker2D", "BulletContainer", "Node", "shootingCoolDown", "Timer", "StateMachine", "currentState", "states", "IdleState", "AttackState", "RunState", "_on_attack_range_body_entered", "body_entered", "_on_attack_range_body_exited", "body_exited", "_on_shooting_cool_down_timeout", "timeout"),
+"node_count": 14,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 11, 0, -1, 9, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 1073741831, 6, 1073741832, 7, 1073741833, 8, 1, 10, 0, 0, 12, 12, -1, 5, 2, 9, 13, 10, 14, 11, 15, 12, 16, 13, 0, 0, 0, 17, 17, -1, 5, 18, 14, 1, 0, 2, 15, 13, 16, 19, 17, 0, 0, 0, 20, 20, -1, 2, 2, 15, 21, 18, 0, 0, 0, 39, 22, -1, 18, 18, 14, 23, 19, 24, 20, 25, 20, 26, 20, 27, 20, 28, 21, 29, 22, 30, 23, 31, 24, 32, 2, 33, 2, 13, 25, 34, 26, 35, 27, 36, 28, 37, 28, 38, 14, 0, 0, 0, 41, 40, -1, 0, 0, 5, 0, 20, 20, -1, 2, 2, 15, 21, 29, 0, 0, 0, 43, 42, -1, 0, 0, 0, 0, 45, 44, -1, 0, 0, 0, 0, 47, 46, -1, 0, 0, 0, 0, 45, 48, 30, 3, 5, 31, 1073741873, 32, 1073741874, 33, 0, 10, 0, 45, 51, -1, 1, 5, 34, 0, 10, 0, 45, 52, -1, 1, 5, 35, 0, 10, 0, 45, 53, -1, 1, 5, 36, 0),
+"variants": [1, Vector2(133.888, 152.453), 2, Vector2(39.9875, -0.999283), ExtResource("1_nq20o"), Array[ExtResource("2_jny3o")]([ExtResource("3_gfave"), ExtResource("4_wbsyf"), ExtResource("5_0np3l")]), NodePath("StateMachine"), NodePath("AnimatedSprite2D"), NodePath("AttackRange"), Vector2(0, -12), Vector2(0.5, 0.5), SubResource("SpriteFrames_l88vv"), &"walk", 0.249973, false, Vector2(0, -6), Vector2(0.2, 0.2), ExtResource("7_3cosr"), SubResource("CircleShape2D_ofsxj"), 8, 0.5, -6.0, -16.0, 19.0, -12.0, Vector2(0.5, 0.2), SubResource("StyleBoxFlat_1wwld"), SubResource("StyleBoxFlat_y5vj3"), 20.0, SubResource("CircleShape2D_1wwld"), ExtResource("8_l6j05"), ExtResource("9_1kbrn"), NodePath("RunState"), [NodePath("AttackState"), NodePath("IdleState"), NodePath("RunState")], ExtResource("10_gh0ia"), ExtResource("11_a5q87"), ExtResource("12_7vth1")],
+"version": 3
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0np3l"]
+radius = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q8hrk"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3cosr"]
+bg_color = Color(0.958, 0, 0.236304, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l6j05"]
+radius = 6.0
+
+[sub_resource type="PackedScene" id="PackedScene_wbsyf"]
+_bundled = {
+"conn_count": 3,
+"conns": PackedInt32Array(5, 0, 56, 55, 2, 0, 0, 5, 0, 58, 57, 2, 0, 0, 9, 0, 60, 59, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("@CharacterBody2D@33", "texture_filter", "position", "collision_layer", "velocity", "script", "available_monster_types", "state_machine_node", "animPlayer", "chaseArea", "Enemy", "CharacterBody2D", "AnimatedSprite2D", "scale", "sprite_frames", "animation", "frame_progress", "flip_h", "Sprite2D", "visible", "texture", "CollisionShape2D", "shape", "HealthBar", "anchors_preset", "anchor_left", "anchor_top", "anchor_right", "anchor_bottom", "offset_left", "offset_top", "offset_right", "offset_bottom", "grow_horizontal", "grow_vertical", "theme_override_styles/background", "theme_override_styles/fill", "max_value", "value", "show_percentage", "ProgressBar", "AttackRange", "Area2D", "Aim", "Marker2D", "BulletContainer", "Node", "shootingCoolDown", "Timer", "StateMachine", "currentState", "states", "IdleState", "AttackState", "RunState", "_on_attack_range_body_entered", "body_entered", "_on_attack_range_body_exited", "body_exited", "_on_shooting_cool_down_timeout", "timeout"),
+"node_count": 14,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 11, 0, -1, 9, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 1073741831, 6, 1073741832, 7, 1073741833, 8, 1, 10, 0, 0, 12, 12, -1, 6, 2, 9, 13, 10, 14, 11, 15, 12, 16, 13, 17, 14, 0, 0, 0, 18, 18, -1, 5, 19, 15, 1, 0, 2, 16, 13, 17, 20, 18, 0, 0, 0, 21, 21, -1, 2, 2, 16, 22, 19, 0, 0, 0, 40, 23, -1, 18, 19, 15, 24, 20, 25, 21, 26, 21, 27, 21, 28, 21, 29, 22, 30, 23, 31, 24, 32, 25, 33, 2, 34, 2, 13, 26, 35, 27, 36, 28, 37, 29, 38, 29, 39, 15, 0, 0, 0, 42, 41, -1, 0, 0, 5, 0, 21, 21, -1, 2, 2, 16, 22, 30, 0, 0, 0, 44, 43, -1, 0, 0, 0, 0, 46, 45, -1, 0, 0, 0, 0, 48, 47, -1, 0, 0, 0, 0, 46, 49, 31, 3, 5, 32, 1073741874, 33, 1073741875, 34, 0, 10, 0, 46, 52, -1, 1, 5, 35, 0, 10, 0, 46, 53, -1, 1, 5, 36, 0, 10, 0, 46, 54, -1, 1, 5, 37, 0),
+"variants": [1, Vector2(255.702, 32.0885), 2, Vector2(-27.9025, 28.6609), ExtResource("1_nq20o"), Array[ExtResource("2_jny3o")]([ExtResource("3_gfave"), ExtResource("4_wbsyf"), ExtResource("5_0np3l")]), NodePath("StateMachine"), NodePath("AnimatedSprite2D"), NodePath("AttackRange"), Vector2(0, -12), Vector2(0.5, 0.5), SubResource("SpriteFrames_l88vv"), &"walk", 0.249973, true, false, Vector2(0, -6), Vector2(0.2, 0.2), ExtResource("7_3cosr"), SubResource("CircleShape2D_0np3l"), 8, 0.5, -6.0, -16.0, 19.0, -12.0, Vector2(0.5, 0.2), SubResource("StyleBoxFlat_q8hrk"), SubResource("StyleBoxFlat_3cosr"), 20.0, SubResource("CircleShape2D_l6j05"), ExtResource("8_l6j05"), ExtResource("9_1kbrn"), NodePath("RunState"), [NodePath("AttackState"), NodePath("IdleState"), NodePath("RunState")], ExtResource("10_gh0ia"), ExtResource("11_a5q87"), ExtResource("12_7vth1")],
+"version": 3
+}
+
+[sub_resource type="PackedScene" id="PackedScene_0np3l"]
+_bundled = {
+"conn_count": 3,
+"conns": PackedInt32Array(5, 0, 55, 54, 2, 0, 0, 5, 0, 57, 56, 2, 0, 0, 9, 0, 59, 58, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("@CharacterBody2D@35", "texture_filter", "position", "collision_layer", "velocity", "script", "available_monster_types", "state_machine_node", "animPlayer", "chaseArea", "Enemy", "CharacterBody2D", "AnimatedSprite2D", "scale", "sprite_frames", "animation", "frame_progress", "Sprite2D", "visible", "texture", "CollisionShape2D", "shape", "HealthBar", "anchors_preset", "anchor_left", "anchor_top", "anchor_right", "anchor_bottom", "offset_left", "offset_top", "offset_right", "offset_bottom", "grow_horizontal", "grow_vertical", "theme_override_styles/background", "theme_override_styles/fill", "max_value", "value", "show_percentage", "ProgressBar", "AttackRange", "Area2D", "Aim", "Marker2D", "BulletContainer", "Node", "shootingCoolDown", "Timer", "StateMachine", "currentState", "states", "IdleState", "AttackState", "RunState", "_on_attack_range_body_entered", "body_entered", "_on_attack_range_body_exited", "body_exited", "_on_shooting_cool_down_timeout", "timeout"),
+"node_count": 14,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 11, 0, -1, 9, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 1073741831, 6, 1073741832, 7, 1073741833, 8, 1, 10, 0, 0, 12, 12, -1, 5, 2, 9, 13, 10, 14, 11, 15, 12, 16, 13, 0, 0, 0, 17, 17, -1, 5, 18, 14, 1, 0, 2, 15, 13, 16, 19, 17, 0, 0, 0, 20, 20, -1, 2, 2, 15, 21, 18, 0, 0, 0, 39, 22, -1, 18, 18, 14, 23, 19, 24, 20, 25, 20, 26, 20, 27, 20, 28, 21, 29, 22, 30, 23, 31, 24, 32, 2, 33, 2, 13, 25, 34, 26, 35, 27, 36, 28, 37, 28, 38, 14, 0, 0, 0, 41, 40, -1, 0, 0, 5, 0, 20, 20, -1, 2, 2, 15, 21, 29, 0, 0, 0, 43, 42, -1, 0, 0, 0, 0, 45, 44, -1, 0, 0, 0, 0, 47, 46, -1, 0, 0, 0, 0, 45, 48, 30, 3, 5, 31, 1073741873, 32, 1073741874, 33, 0, 10, 0, 45, 51, -1, 1, 5, 34, 0, 10, 0, 45, 52, -1, 1, 5, 35, 0, 10, 0, 45, 53, -1, 1, 5, 36, 0),
+"variants": [1, Vector2(216, 44), 2, Vector2(0, 40), ExtResource("1_nq20o"), Array[ExtResource("2_jny3o")]([ExtResource("3_gfave"), ExtResource("4_wbsyf"), ExtResource("5_0np3l")]), NodePath("StateMachine"), NodePath("AnimatedSprite2D"), NodePath("AttackRange"), Vector2(0, -12), Vector2(0.5, 0.5), SubResource("SpriteFrames_l88vv"), &"walk", 0.249973, false, Vector2(0, -6), Vector2(0.2, 0.2), ExtResource("7_3cosr"), SubResource("CircleShape2D_0np3l"), 8, 0.5, -6.0, -16.0, 19.0, -12.0, Vector2(0.5, 0.2), SubResource("StyleBoxFlat_q8hrk"), SubResource("StyleBoxFlat_3cosr"), 20.0, SubResource("CircleShape2D_l6j05"), ExtResource("8_l6j05"), ExtResource("9_1kbrn"), NodePath("RunState"), [NodePath("AttackState"), NodePath("IdleState"), NodePath("RunState")], ExtResource("10_gh0ia"), ExtResource("11_a5q87"), ExtResource("12_7vth1")],
+"version": 3
+}
+
+[sub_resource type="PackedScene" id="PackedScene_q8hrk"]
+_bundled = {
+"conn_count": 3,
+"conns": PackedInt32Array(5, 0, 55, 54, 2, 0, 0, 5, 0, 57, 56, 2, 0, 0, 9, 0, 59, 58, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("@CharacterBody2D@37", "texture_filter", "position", "collision_layer", "velocity", "script", "available_monster_types", "state_machine_node", "animPlayer", "chaseArea", "Enemy", "CharacterBody2D", "AnimatedSprite2D", "scale", "sprite_frames", "animation", "frame_progress", "Sprite2D", "visible", "texture", "CollisionShape2D", "shape", "HealthBar", "anchors_preset", "anchor_left", "anchor_top", "anchor_right", "anchor_bottom", "offset_left", "offset_top", "offset_right", "offset_bottom", "grow_horizontal", "grow_vertical", "theme_override_styles/background", "theme_override_styles/fill", "max_value", "value", "show_percentage", "ProgressBar", "AttackRange", "Area2D", "Aim", "Marker2D", "BulletContainer", "Node", "shootingCoolDown", "Timer", "StateMachine", "currentState", "states", "IdleState", "AttackState", "RunState", "_on_attack_range_body_entered", "body_entered", "_on_attack_range_body_exited", "body_exited", "_on_shooting_cool_down_timeout", "timeout"),
+"node_count": 14,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 11, 0, -1, 9, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 1073741831, 6, 1073741832, 7, 1073741833, 8, 1, 10, 0, 0, 12, 12, -1, 5, 2, 9, 13, 10, 14, 11, 15, 12, 16, 13, 0, 0, 0, 17, 17, -1, 5, 18, 14, 1, 0, 2, 15, 13, 16, 19, 17, 0, 0, 0, 20, 20, -1, 2, 2, 15, 21, 18, 0, 0, 0, 39, 22, -1, 18, 18, 14, 23, 19, 24, 20, 25, 20, 26, 20, 27, 20, 28, 21, 29, 22, 30, 23, 31, 24, 32, 2, 33, 2, 13, 25, 34, 26, 35, 27, 36, 28, 37, 28, 38, 14, 0, 0, 0, 41, 40, -1, 0, 0, 5, 0, 20, 20, -1, 2, 2, 15, 21, 29, 0, 0, 0, 43, 42, -1, 0, 0, 0, 0, 45, 44, -1, 0, 0, 0, 0, 47, 46, -1, 0, 0, 0, 0, 45, 48, 30, 3, 5, 31, 1073741873, 32, 1073741874, 33, 0, 10, 0, 45, 51, -1, 1, 5, 34, 0, 10, 0, 45, 52, -1, 1, 5, 35, 0, 10, 0, 45, 53, -1, 1, 5, 36, 0),
+"variants": [1, Vector2(42.2469, 92.9975), 2, Vector2(15.6174, 12.4939), ExtResource("1_nq20o"), Array[ExtResource("2_jny3o")]([ExtResource("3_gfave"), ExtResource("4_wbsyf"), ExtResource("5_0np3l")]), NodePath("StateMachine"), NodePath("AnimatedSprite2D"), NodePath("AttackRange"), Vector2(0, -12), Vector2(0.5, 0.5), SubResource("SpriteFrames_yjek7"), &"walk", 0.249973, false, Vector2(0, -6), Vector2(0.2, 0.2), ExtResource("7_3cosr"), SubResource("CircleShape2D_0np3l"), 8, 0.5, -6.0, -16.0, 19.0, -12.0, Vector2(0.5, 0.2), SubResource("StyleBoxFlat_q8hrk"), SubResource("StyleBoxFlat_3cosr"), 50.0, SubResource("CircleShape2D_l6j05"), ExtResource("8_l6j05"), ExtResource("9_1kbrn"), NodePath("RunState"), [NodePath("AttackState"), NodePath("IdleState"), NodePath("RunState")], ExtResource("10_gh0ia"), ExtResource("11_a5q87"), ExtResource("12_7vth1")],
+"version": 3
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3fjlj"]
+size = Vector2(14, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ulc0"]
+radius = 60.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xnkcx"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pwp32"]
+bg_color = Color(1, 0, 0.0431373, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="Gradient" id="Gradient_pwp32"]
+offsets = PackedFloat32Array(0.811688, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vplrr"]
+gradient = SubResource("Gradient_pwp32")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="PackedScene" id="PackedScene_3cosr"]
+_bundled = {
+"conn_count": 5,
+"conns": PackedInt32Array(4, 0, 58, 57, 2, 0, 0, 4, 0, 60, 59, 2, 0, 0, 7, 0, 62, 61, 2, 0, 0, 14, 0, 64, 63, 2, 0, 0, 15, 0, 64, 65, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("@StaticBody2D@24", "position", "scale", "collision_mask", "input_pickable", "script", "size", "Tower", "StaticBody2D", "Sprite2D", "z_index", "texture", "flip_h", "CollisionShape2D", "shape", "Aim", "Marker2D", "Area2D", "ShootArea", "BulletContainer", "Node", "shootingCoolDown", "Timer", "RangeVisualizer", "visible", "Node2D", "HB_node", "HealthBar", "offset_left", "offset_top", "offset_right", "offset_bottom", "theme_override_styles/background", "theme_override_styles/fill", "value", "show_percentage", "metadata/_edit_use_anchors_", "ProgressBar", "D_U_node", "TowerActionsUI", "layout_mode", "anchors_preset", "size_flags_horizontal", "size_flags_vertical", "Control", "ButtonsContainer", "theme_override_constants/separation", "HBoxContainer", "DeleteButton", "texture_filter", "icon", "Button", "UpgradeButton", "PointLight2D", "blend_mode", "texture_scale", "height", "_on_area_2d_body_entered", "body_entered", "_on_area_2d_body_exited", "body_exited", "_on_shooting_cool_down_timeout", "timeout", "_on_delete_button_pressed", "pressed", "_on_upgrade_button_pressed"),
+"node_count": 17,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 8, 0, -1, 6, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 1, 7, 0, 0, 9, 9, -1, 4, 10, 6, 2, 7, 11, 8, 12, 3, 0, 0, 0, 13, 13, -1, 1, 14, 9, 0, 0, 0, 16, 15, -1, 1, 1, 10, 0, 0, 0, 17, 17, -1, 1, 3, 11, 0, 4, 0, 13, 18, -1, 1, 14, 12, 0, 0, 0, 20, 19, -1, 0, 0, 0, 0, 22, 21, -1, 0, 0, 0, 0, 25, 23, -1, 2, 24, 13, 5, 14, 0, 0, 0, 25, 26, -1, 0, 0, 9, 0, 37, 27, -1, 11, 24, 13, 28, 15, 29, 16, 30, 17, 31, 18, 2, 19, 32, 20, 33, 21, 34, 22, 35, 13, 36, 3, 0, 0, 0, 25, 38, -1, 1, 10, 11, 0, 11, 0, 44, 39, -1, 10, 24, 13, 40, 2, 41, 23, 29, 24, 30, 25, 31, 26, 2, 27, 42, 28, 43, 28, 36, 3, 0, 12, 0, 47, 45, -1, 6, 40, 23, 28, 29, 29, 30, 30, 31, 31, 15, 46, 32, 0, 13, 0, 51, 48, -1, 3, 49, 6, 40, 11, 50, 33, 0, 13, 0, 51, 52, -1, 3, 49, 6, 40, 11, 50, 34, 0, 0, 0, 53, 53, -1, 4, 54, 11, 11, 35, 55, 36, 56, 37, 0),
+"variants": [Vector2(232, 96), Vector2(0.5, 0.5), 3, true, ExtResource("15_igbm8"), Vector2i(3, 2), 1, Vector2(0.05, 0.05), ExtResource("16_aeo7v"), SubResource("RectangleShape2D_3fjlj"), Vector2(6, 0), 2, SubResource("CircleShape2D_4ulc0"), false, ExtResource("17_ubflw"), -8.0, -14.0, 17.0, -10.0, Vector2(0.6, 0.3), SubResource("StyleBoxFlat_xnkcx"), SubResource("StyleBoxFlat_pwp32"), 100.0, 0, -12.0, 40.0, 28.0, Vector2(0.4, 0.4), 4, -52.0, -48.0, 42.0, 25, ExtResource("18_5mwl8"), ExtResource("19_f6w7i"), SubResource("GradientTexture2D_vplrr"), 4.0, 5.0],
+"version": 3
+}
+
+[sub_resource type="PackedScene" id="PackedScene_l6j05"]
+_bundled = {
+"conn_count": 5,
+"conns": PackedInt32Array(4, 0, 59, 58, 2, 0, 0, 4, 0, 61, 60, 2, 0, 0, 7, 0, 63, 62, 2, 0, 0, 14, 0, 65, 64, 2, 0, 0, 15, 0, 65, 66, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("@StaticBody2D@25", "position", "scale", "collision_mask", "input_pickable", "script", "size", "Tower", "StaticBody2D", "Sprite2D", "z_index", "rotation", "texture", "flip_h", "CollisionShape2D", "shape", "Aim", "Marker2D", "Area2D", "ShootArea", "BulletContainer", "Node", "shootingCoolDown", "Timer", "RangeVisualizer", "visible", "Node2D", "HB_node", "HealthBar", "offset_left", "offset_top", "offset_right", "offset_bottom", "theme_override_styles/background", "theme_override_styles/fill", "value", "show_percentage", "metadata/_edit_use_anchors_", "ProgressBar", "D_U_node", "TowerActionsUI", "layout_mode", "anchors_preset", "size_flags_horizontal", "size_flags_vertical", "Control", "ButtonsContainer", "theme_override_constants/separation", "HBoxContainer", "DeleteButton", "texture_filter", "icon", "Button", "UpgradeButton", "PointLight2D", "blend_mode", "texture_scale", "height", "_on_area_2d_body_entered", "body_entered", "_on_area_2d_body_exited", "body_exited", "_on_shooting_cool_down_timeout", "timeout", "_on_delete_button_pressed", "pressed", "_on_upgrade_button_pressed"),
+"node_count": 17,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 8, 0, -1, 6, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 1, 7, 0, 0, 9, 9, -1, 5, 10, 6, 11, 7, 2, 8, 12, 9, 13, 3, 0, 0, 0, 14, 14, -1, 1, 15, 10, 0, 0, 0, 17, 16, -1, 1, 1, 11, 0, 0, 0, 18, 18, -1, 1, 3, 12, 0, 4, 0, 14, 19, -1, 1, 15, 13, 0, 0, 0, 21, 20, -1, 0, 0, 0, 0, 23, 22, -1, 0, 0, 0, 0, 26, 24, -1, 2, 25, 14, 5, 15, 0, 0, 0, 26, 27, -1, 0, 0, 9, 0, 38, 28, -1, 10, 29, 16, 30, 17, 31, 18, 32, 19, 2, 20, 33, 21, 34, 22, 35, 23, 36, 14, 37, 3, 0, 0, 0, 26, 39, -1, 1, 10, 12, 0, 11, 0, 45, 40, -1, 10, 25, 14, 41, 2, 42, 24, 30, 25, 31, 26, 32, 27, 2, 28, 43, 29, 44, 29, 37, 3, 0, 12, 0, 48, 46, -1, 6, 41, 24, 29, 30, 30, 31, 31, 32, 32, 16, 47, 33, 0, 13, 0, 52, 49, -1, 3, 50, 6, 41, 12, 51, 34, 0, 13, 0, 52, 53, -1, 3, 50, 6, 41, 12, 51, 35, 0, 0, 0, 54, 54, -1, 4, 55, 12, 12, 36, 56, 37, 57, 38, 0),
+"variants": [Vector2(216, 144), Vector2(0.5, 0.5), 3, true, ExtResource("15_igbm8"), Vector2i(3, 2), 1, 0.769711, Vector2(0.05, 0.05), ExtResource("16_aeo7v"), SubResource("RectangleShape2D_3fjlj"), Vector2(6, 0), 2, SubResource("CircleShape2D_4ulc0"), false, ExtResource("17_ubflw"), -8.0, -14.0, 17.0, -10.0, Vector2(0.6, 0.3), SubResource("StyleBoxFlat_xnkcx"), SubResource("StyleBoxFlat_pwp32"), 85.0, 0, -12.0, 40.0, 28.0, Vector2(0.4, 0.4), 4, -52.0, -48.0, 42.0, 25, ExtResource("18_5mwl8"), ExtResource("19_f6w7i"), SubResource("GradientTexture2D_vplrr"), 4.0, 5.0],
+"version": 3
+}
+
+[sub_resource type="PackedScene" id="PackedScene_1kbrn"]
+_bundled = {
+"conn_count": 5,
+"conns": PackedInt32Array(4, 0, 58, 57, 2, 0, 0, 4, 0, 60, 59, 2, 0, 0, 7, 0, 62, 61, 2, 0, 0, 14, 0, 64, 63, 2, 0, 0, 15, 0, 64, 65, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("@StaticBody2D@26", "position", "scale", "collision_mask", "input_pickable", "script", "size", "Tower", "StaticBody2D", "Sprite2D", "z_index", "texture", "flip_h", "CollisionShape2D", "shape", "Aim", "Marker2D", "Area2D", "ShootArea", "BulletContainer", "Node", "shootingCoolDown", "Timer", "RangeVisualizer", "visible", "Node2D", "HB_node", "HealthBar", "offset_left", "offset_top", "offset_right", "offset_bottom", "theme_override_styles/background", "theme_override_styles/fill", "value", "show_percentage", "metadata/_edit_use_anchors_", "ProgressBar", "D_U_node", "TowerActionsUI", "layout_mode", "anchors_preset", "size_flags_horizontal", "size_flags_vertical", "Control", "ButtonsContainer", "theme_override_constants/separation", "HBoxContainer", "DeleteButton", "texture_filter", "icon", "Button", "UpgradeButton", "PointLight2D", "blend_mode", "texture_scale", "height", "_on_area_2d_body_entered", "body_entered", "_on_area_2d_body_exited", "body_exited", "_on_shooting_cool_down_timeout", "timeout", "_on_delete_button_pressed", "pressed", "_on_upgrade_button_pressed"),
+"node_count": 17,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 8, 0, -1, 6, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 1, 7, 0, 0, 9, 9, -1, 4, 10, 6, 2, 7, 11, 8, 12, 3, 0, 0, 0, 13, 13, -1, 1, 14, 9, 0, 0, 0, 16, 15, -1, 1, 1, 10, 0, 0, 0, 17, 17, -1, 1, 3, 11, 0, 4, 0, 13, 18, -1, 1, 14, 12, 0, 0, 0, 20, 19, -1, 0, 0, 0, 0, 22, 21, -1, 0, 0, 0, 0, 25, 23, -1, 2, 24, 13, 5, 14, 0, 0, 0, 25, 26, -1, 0, 0, 9, 0, 37, 27, -1, 11, 24, 13, 28, 15, 29, 16, 30, 17, 31, 18, 2, 19, 32, 20, 33, 21, 34, 22, 35, 13, 36, 3, 0, 0, 0, 25, 38, -1, 1, 10, 11, 0, 11, 0, 44, 39, -1, 10, 24, 13, 40, 2, 41, 23, 29, 24, 30, 25, 31, 26, 2, 27, 42, 28, 43, 28, 36, 3, 0, 12, 0, 47, 45, -1, 6, 40, 23, 28, 29, 29, 30, 30, 31, 31, 15, 46, 32, 0, 13, 0, 51, 48, -1, 3, 49, 6, 40, 11, 50, 33, 0, 13, 0, 51, 52, -1, 3, 49, 6, 40, 11, 50, 34, 0, 0, 0, 53, 53, -1, 4, 54, 11, 11, 35, 55, 36, 56, 37, 0),
+"variants": [Vector2(184, 112), Vector2(0.5, 0.5), 3, true, ExtResource("15_igbm8"), Vector2i(3, 2), 1, Vector2(0.05, 0.05), ExtResource("16_aeo7v"), SubResource("RectangleShape2D_3fjlj"), Vector2(6, 0), 2, SubResource("CircleShape2D_4ulc0"), false, ExtResource("17_ubflw"), -8.0, -14.0, 17.0, -10.0, Vector2(0.6, 0.3), SubResource("StyleBoxFlat_xnkcx"), SubResource("StyleBoxFlat_pwp32"), 100.0, 0, -12.0, 40.0, 28.0, Vector2(0.4, 0.4), 4, -52.0, -48.0, 42.0, 25, ExtResource("18_5mwl8"), ExtResource("19_f6w7i"), SubResource("GradientTexture2D_vplrr"), 4.0, 5.0],
+"version": 3
+}
+
+[resource]
+script = ExtResource("1_btafe")
+tower_array = Array[PackedScene]([SubResource("PackedScene_3cosr"), SubResource("PackedScene_l6j05"), SubResource("PackedScene_1kbrn")])
+enemy_array = Array[PackedScene]([SubResource("PackedScene_nq20o"), SubResource("PackedScene_jny3o"), SubResource("PackedScene_gfave"), SubResource("PackedScene_wbsyf"), SubResource("PackedScene_0np3l"), SubResource("PackedScene_q8hrk")])

@@ -18,7 +18,7 @@ func quit_game():
 func _on_save_button_pressed():
 	var data=SceneData.new()
 	
-	var towers=get_tree().get_nodes_in_group("active_towers")
+	var towers=get_tree().get_nodes_in_group("Tower")
 	for tower in towers:
 		var tower_scene=PackedScene.new()
 		tower_scene.pack(tower)
