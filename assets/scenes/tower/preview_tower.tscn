@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://va1v4h7yi2bt"]
+
+[ext_resource type="Script" uid="uid://cuclbtnfynd4x" path="res://assets/scripts/tower/preview_tower.gd" id="1_5ihcb"]
+
+[node name="preview_tower" type="Node2D"]
+script = ExtResource("1_5ihcb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

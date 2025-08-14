@@ -33,6 +33,7 @@ offset_bottom = 109.0
 
 [node name="UITower" parent="UI/UI/VBoxContainer" node_paths=PackedStringArray("map_layer", "towers_node", "preview_towers_node") instance=ExtResource("8_umact")]
 layout_mode = 2
+tower = ExtResource("6_r7tk0")
 map_layer = NodePath("../../../../MapLayer")
 towers_node = NodePath("../../../../Towers")
 preview_towers_node = NodePath("../../../../PreviewTowers")

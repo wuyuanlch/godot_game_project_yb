@@ -48,7 +48,7 @@ size = Vector2i(3, 2)
 light_shape = NodePath("Area2D2/Light_CollisionShape")
 point_light = NodePath("PointLight2D")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["Tower"]]
 z_index = 1
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("2_vb3hn")
