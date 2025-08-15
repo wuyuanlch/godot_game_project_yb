@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 ## 怪物属性配置节点
 @export var monster_information: Node2D
+@export var bullet: PackedScene
 
 ## 怪物属性
 var health: int
@@ -26,12 +27,12 @@ var  floating_text = preload("res://assets/scenes/enemy/floating_text.tscn")
 
 const RECHECK_INTERVAL: float = 0.5 # 每隔1秒重新检查一次塔
 
-var bullet: PackedScene=preload("res://assets/scenes/bullet/enemy_bullet.tscn")
+
 var curr: Node2D
 var bullet_damage: int
 var can_shoot: bool=true
 
-const bullet_stats = preload("res://bullet/enemy_bullet/default.tres")
+const bullet_stats = preload("res://assets/scripts/bullet/tower/default.tres")
 
 # 动画
 @export var state_machine_node:Node
@@ -231,6 +232,7 @@ func flip()->void:
 		return
 	var isMovingLeft:bool=velocity.x<0
 	animPlayer.flip_h=isMovingLeft
+	$AttackRange.scale.x = -1 if isMovingLeft else 1  # 新增这行
 
 
 func _on_attack_range_body_exited(body):

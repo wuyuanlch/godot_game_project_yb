@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://lvxsicmgvlvu"]
 
-[ext_resource type="PackedScene" uid="uid://db7t02pms4t1t" path="res://assets/scenes/enemy/small_monsters/base_enemy.tscn" id="1_fl50e"]
+[ext_resource type="PackedScene" uid="uid://db7t02pms4t1t" path="res://assets/scenes/enemy/base_enemy.tscn" id="1_fl50e"]
 [ext_resource type="Texture2D" uid="uid://bkxfl7rpu4cpy" path="res://assets/graphics/sprites/temporary_diagram/enemy/Enemy_001.png" id="2_yeu12"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ayxph"]

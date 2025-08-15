@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://dklqblyab6wrk"]
+
+[ext_resource type="Theme" uid="uid://bx64jjwsvwpv1" path="res://assets/scripts/UI/pause_theme.tres" id="1_okewl"]
+[ext_resource type="FontFile" uid="uid://bydfh0blmt8lh" path="res://assets/graphics/sprites/temporary_diagram/front/ark-pixel-12px-monospaced-zh_cn.ttf" id="2_wva61"]
+[ext_resource type="PackedScene" uid="uid://bl456sum6ypp3" path="res://assets/scenes/screens/button/screen_button.tscn" id="3_6ofrk"]
+
+[node name="StartUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Start"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_okewl")
+theme_type_variation = &"StartPanel"
+
+[node name="Label" type="Label" parent="Start/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -35.0
+offset_right = 36.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_wva61")
+theme_override_font_sizes/font_size = 12
+text = "游戏开始界面"
+
+[node name="StartButton" parent="Start/Panel" instance=ExtResource("3_6ofrk")]
+layout_mode = 1
+offset_top = -11.0
+offset_bottom = 11.0
+text = "Start"
+
+[node name="LoadButton" parent="Start/Panel" instance=ExtResource("3_6ofrk")]
+layout_mode = 1
+offset_top = 16.0
+offset_bottom = 38.0
+text = "Load"
+
+[node name="QuitButton" parent="Start/Panel" instance=ExtResource("3_6ofrk")]
+layout_mode = 1
+offset_top = 44.0
+offset_bottom = 66.0
+text = "Quit"

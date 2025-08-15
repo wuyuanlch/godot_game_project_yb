@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://nlu0hmtwxq5q" path="res://assets/scripts/save/scence_data.gd" id="1_btafe"]
 [ext_resource type="Script" uid="uid://ckn6bou6o8obb" path="res://assets/scripts/enemy/base_enemy.gd" id="1_nq20o"]
-[ext_resource type="Script" uid="uid://brtcbnpn57rj7" path="res://monster_types/MonsterStats.gd" id="2_jny3o"]
+[ext_resource type="Script" uid="uid://brtcbnpn57rj7" path="res://assets/scripts/save/load/MonsterStats.gd" id="2_jny3o"]
 [ext_resource type="Resource" uid="uid://c0a7qx7sf6ymi" path="res://monster_types/monster_0.tres" id="3_gfave"]
 [ext_resource type="Resource" uid="uid://d11bhd0mvoovp" path="res://monster_types/monster_1.tres" id="4_wbsyf"]
 [ext_resource type="Resource" uid="uid://coyv48yq86q0" path="res://monster_types/monster_2.tres" id="5_0np3l"]

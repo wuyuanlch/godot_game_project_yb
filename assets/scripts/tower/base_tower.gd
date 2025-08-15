@@ -3,7 +3,7 @@ extends StaticBody2D
 
 # 单个防御塔的代码，可朝向敌人，攻击离中心点最近的敌人
 signal tower_destroyed(tile_pos, size)
-var bullet:PackedScene = preload("res://assets/scenes/bullet/tower_bullet.tscn")
+@export var bullet:PackedScene
 var initial_tile_pos: Vector2i
 var current_targets:Array=[]
 var curr :CharacterBody2D
@@ -28,7 +28,7 @@ var max_health: int = 100
 @export var point_light: PointLight2D
 
 # 加载哪种元素的子弹
-const bullet_stats = preload("res://bullet/tower_bullet/default.tres")
+const bullet_stats = preload("res://assets/scripts/bullet/tower/default.tres")
 
 func _ready():
 	

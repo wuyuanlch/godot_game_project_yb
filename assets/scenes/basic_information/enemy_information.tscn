@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4y55tdmxchgd"]
-
-[ext_resource type="Script" uid="uid://ckgmjp45afldt" path="res://assets/scripts/basic_information/enemy_information.gd" id="1_fthv3"]
-
-[node name="Information" type="Node2D"]
-script = ExtResource("1_fthv3")
-power = 10
